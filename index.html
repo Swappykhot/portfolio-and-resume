@@ -1,303 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio and Resume | Swapnil Khot</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!-- ICONS CDN (free and allowed for static site) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<title>Portfolio and Resume | Swapnil Khot</title>
 
-  <style>
-    /* FULL PAGE */
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      font-family: Poppins, Arial, sans-serif;
-      background: #faf7ff;
-    }
+<style>
 
-    body {
-      position: relative;
-      overflow-x: hidden;
-    }
+/* GLOBAL */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Inter", Arial, sans-serif;
+  background: #f8f5ff;
+  color: #1a0f2e;
+  scroll-behavior: smooth;
+}
 
-    /* MOUSE MAGIC BACKGROUND */
-    .mouse-bg {
-      position: fixed;
-      inset: 0;
-      z-index: -50;
-      background: radial-gradient(circle at 50% 50%, rgba(150,50,255,0.15), rgba(90,10,160,0.12), transparent 70%);
-      transition: 0.08s ease-out;
-      pointer-events: none;
-    }
+body {
+  overflow-x: hidden;
+}
 
-    /* MAGIC CURSOR TRAIL */
-    .cursor-trail {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(180,90,255,0.65);
-      pointer-events: none;
-      z-index: 100;
-      filter: blur(2px);
-      animation: rise 1.2s ease-out forwards;
-    }
+/* MOUSE GRADIENT THAT FOLLOWS THE CURSOR */
+#mouseGlow {
+  position: fixed;
+  inset: 0;
+  z-index: -100;
+  background: radial-gradient(circle at 50% 50%, rgba(140,40,255,0.17), rgba(80,8,150,0.14), transparent 72%);
+  transition: background 0.25s ease-out;
+  pointer-events: none;
+}
 
-    @keyframes rise {
-      0% {transform:scale(1); opacity:1;}
-      100%{transform:scale(5); opacity:0; translateY:-22px;}
-    }
+.container {
+  max-width: 1080px;
+  margin: auto;
+  padding: 50px 20px;
+}
 
-    /* HEADER */
-    .hero {
-      padding: 60px 18px 40px;
-      text-align: center;
-      transition: 0.4s ease;
-    }
+/* HERO */
+.hero {
+  padding: 80px 20px 40px;
+  text-align: center;
+  transition:0.3s;
+}
 
-    .hero h1 {
-      font-size: 38px;
-      margin-bottom: 4px;
-      font-weight: 600;
-    }
+.hero h1 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
 
-    .subtitle {
-      font-size: 18px;
-      color: #551a8b;
-      margin-bottom: 14px;
-    }
+.hero .subtitle {
+  font-size: 17px;
+  color: #6a4c9c;
+  margin-bottom: 20px;
+}
 
-    .nav a {
-      margin: 0 12px;
-      font-size:16px;
-      text-decoration:none;
-      color:#7a00d9;
-      font-weight:500;
-      position:relative;
-      transition:0.3s;
-    }
+/* NAVIGATION */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap:wrap;
+}
 
-    .nav a::after {
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:-3px;
-      width:0%;
-      height:2px;
-      background:#7a00d9;
-      transition:0.3s;
-    }
+.nav a {
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #7a38ff;
+  position: relative;
+}
 
-    .nav a:hover::after { width:100%; }
+.nav a::after {
+  content:"";
+  position:absolute;
+  left:0; bottom:-3px;
+  width:0%; height:2px;
+  background:#7a38ff;
+  transition:0.3s;
+}
 
-    /* CARDS */
-    .container {
-      width: 100%;
-      max-width: 1100px;
-      margin: auto;
-      padding: 12px 20px 40px;
-    }
+.nav a:hover::after {width:100%;}
 
-    .card {
-      background:white;
-      padding:28px 34px;
-      border-radius:12px;
-      margin-bottom:22px;
-      box-shadow:0 2px 13px rgba(116,0,255,0.06);
-      transition:0.3s ease;
-      border:1px solid rgba(116,0,255,0.08);
-      animation: appear 0.7s ease-out;
-    }
+/* CARD SECTIONS */
+.card {
+  background: white;
+  padding: 24px 30px;
+  border-radius:12px;
+  margin-bottom: 24px;
+  box-shadow: 0 3px 10px rgba(120,50,230,0.06);
+  border: 1px solid rgba(120,50,230,0.07);
+  transition: 0.3s ease;
+  opacity:0;
+  transform: translateY(12px);
+  animation: slideUp 0.7s ease forwards;
+}
 
-    @keyframes appear {
-      0% {opacity:0; translateY:10px;}
-      100%{opacity:1; translateY:0px;}
-    }
+@keyframes slideUp {
+  to {
+    opacity:1;
+    transform: translateY(0);
+  }
+}
 
-    .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(128,0,255,0.18);
-      border-color: rgba(128,0,255,0.2);
-    }
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(120,50,230,0.12);
+  border-color: rgba(120,50,230,0.2);
+}
 
-    h2 {
-      font-size:22px;
-      margin-top:0;
-      margin-bottom:12px;
-      color:#4b0082;
-      font-weight:600;
-    }
+.card h2 {
+  font-size:20px;
+  font-weight:600;
+  margin-top:0;
+  margin-bottom:10px;
+  color:#3b2a5b;
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
 
-    ul li {
-      font-size:16px;
-      margin-bottom:8px;
-      line-height:1.6;
-    }
+.card p, .card li {
+  font-size:15px;
+  line-height:1.65;
+  color:#2d1b4b;
+}
 
-    /* BUTTONS */
-    .btn {
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      background:#7a00d9;
-      padding:12px 20px;
-      border-radius:6px;
-      color:white;
-      text-decoration:none;
-      font-size:15px;
-      font-weight:500;
-      transition:0.3s;
-    }
+ul {padding-left:20px;margin:6px 0;}
 
-    .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 14px rgba(122,0,204,0.3);
-    }
+/* BUTTON */
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 22px;
+  background:#7a38ff;
+  color:white;
+  text-decoration:none;
+  border-radius:6px;
+  font-size:14px;
+  font-weight:500;
+  transition:0.3s ease;
+}
 
-    /* CERT CATEGORY BADGES */
-    .cert-badge-container {
-      display:flex;
-      gap:18px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
+.btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(122,56,255,0.3);
+  background: linear-gradient(90deg, #7a38ff, #d18fff);
+}
 
-    .cert-badge {
-      width:100px;
-      height:100px;
-      border-radius:16px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background: linear-gradient(140deg, #8a2be255, #4b008255);
-      color:#4b0082;
-      font-size:38px;
-      transition:0.4s ease;
-      cursor:pointer;
-      border:2px solid transparent;
-    }
+/* CERT BADGES */
+.badges {
+  display:flex;
+  gap:15px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
 
-    .cert-badge:hover {
-      border-color:#8a2be2bb;
-      box-shadow:0 8px 18px rgba(148,0,255,0.25);
-      transform:rotate(8deg) scale(1.07);
-      color:white;
-      background:linear-gradient(140deg,#8a2be2,#4b0082);
-    }
+.badges div {
+  width:72px; height:72px;
+  border-radius:16px;
+  background: #7a38ff22;
+  border:1px solid #7a38ff33;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:28px;
+  color:#7a38ff;
+  transition:0.3s;
+  cursor:pointer;
+}
 
-    /* SOCIAL ICONS */
-    .social a i {
-      font-size:24px;
-      margin:10px 10px 0 0;
-      transition:0.3s;
-      color:#7a00d9;
-    }
+.badges div:hover {
+  transform: rotate(6deg) scale(1.12);
+  background:#7a38ff;
+  color:#fff;
+  box-shadow: 0 6px 16px rgba(122,56,255,0.3);
+}
 
-    .social a:hover i { transform: scale(1.18); }
+/* FOOTER */
+.footer {
+  text-align: center;
+  font-size: 13.5px;
+  color: #6a4c9c;
+  margin-top: 35px;
+}
 
-  </style>
+</style>
 </head>
 
 <body>
+<div id="mouseGlow"></div>
 
-  <div class="mouse-bg" id="mouseBg"></div>
+<div class="container">
 
   <div class="hero">
     <h1>Swapnil Khot</h1>
-    <div class="subtitle">CRM Technical Developer | AWS | Azure | Linux | DevOps</div>
-    <div class="nav">
+    <div class="subtitle">CRM Developer | AWS | Azure | Linux | DevOps</div>
+  </div>
+
+  <div class="nav">
       <a href="#about">About</a>
+      <a href="#skills">Skills</a>
       <a href="#certificates">Certificates</a>
       <a href="#projects">Projects</a>
       <a href="#thoughts">Thoughts</a>
       <a href="#contact">Connect</a>
-    </div>
   </div>
 
-  <div class="container">
+  <section id="about" class="card">
+    <h2><i class="fa-solid fa-user"></i> About</h2>
+    <p>I build custom logic in CRM, integrate APIs, and explore cloud for scalable and reliable systems.</p>
+  </section>
 
-    <section id="about" class="card">
-      <h2><i class="fa-solid fa-user"></i> About Me</h2>
-      <p style="font-size:16px;line-height:1.7;color:#3f0f63;">
-        Building CRM extensions and server-side logic, connected with cloud services. Focus on practicality, reliability and maintainable code.
-      </p>
-    </section>
+  <section id="skills" class="card">
+    <h2><i class="fa-solid fa-code"></i> Skills</h2>
+    <ul>
+      <li>C#, ASP.NET Core Web API</li>
+      <li>Microsoft Dynamics CRM Plugins, automation</li>
+      <li>Cloud core services on AWS and Azure</li>
+      <li>Linux CLI, automated deployments CI/CD basics</li>
+    </ul>
+  </section>
 
-    <section id="certificates" class="card">
-      <h2><i class="fa-solid fa-certificate"></i> Certifications</h2>
-      <p>Browse certification tracks:</p>
-      <div class="cert-badge-container">
-        <div class="cert-badge">
-          <i class="fa-brands fa-aws"></i>
-        </div>
-        <div class="cert-badge">
-          <i class="fa-brands fa-microsoft"></i>
-        </div>
-        <div class="cert-badge">
-          <i class="fa-brands fa-google"></i>
-        </div>
-      </div>
-    </section>
+  <section id="certificates" class="card">
+    <h2><i class="fa-solid fa-award"></i> Certificates</h2>
+    <p>Recognition for learning and applying cloud technologies:</p>
 
-    <section id="projects" class="card">
-      <h2><i class="fa-solid fa-folder-open"></i> Projects</h2>
-      <ul>
-        <li><b>AWS High Availability Migration</b> - Migrated a web app to AWS with load balancing and auto scaling.</li>
-        <li><b>CRM API Integrations</b> - Connected Microsoft Dynamics CRM with .NET APIs and cloud services.</li>
-        <li><b>Cloud Monitoring Setup</b> - Practiced system reliability using monitoring, logs and alerts.</li>
-      </ul>
-    </section>
-
-    <section id="thoughts" class="card">
-      <h2><i class="fa-solid fa-lightbulb"></i> Thoughts</h2>
-      <p>Short notes, real learnings, applied thinking:</p>
-      <ul>
-        <li>Cloud is not just deployment. It’s planning for failure and recovery too.</li>
-        <li>DevOps works when automation reduces effort, not adds complexity.</li>
-        <li>A good system is boring when it works, interesting when it survives.</li>
-      </ul>
-    </section>
-
-    <section id="contact" class="card">
-      <h2><i class="fa-solid fa-link"></i> Connect</h2>
-      <div class="social">
-        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="#"><i class="fa-brands fa-github"></i></a>
-        <a href="mailto:swapnil@example.com"><i class="fa-solid fa-envelope"></i></a>
-      </div>
-    </section>
-
-    <div class="footer">
-      Built and hosted for free using GitHub Pages.
+    <div class="badges">
+      <div><i class="fa-brands fa-aws"></i></div>
+      <div><i class="fa-brands fa-microsoft"></i></div>
+      <div><i class="fa-brands fa-google"></i></div>
     </div>
 
-  </div>
+    <div style="text-align:center;margin-top:19px;">
+       <a class="btn" href="certificates/index.html">View All Certifications</a>
+    </div>
+  </section>
+
+  <section id="projects" class="card">
+    <h2><i class="fa-solid fa-folder"></i> Projects</h2>
+    <ul>
+      <li>High Availability app migration on AWS</li>
+      <li>Cloud integrated backend API systems</li>
+      <li>Dynamics CRM plugins and server automations</li>
+    </ul>
+
+    <div style="text-align:center;margin-top:14px;">
+       <a class="btn" href="projects/index.html">Explore Projects</a>
+    </div>
+  </section>
+
+  <section id="thoughts" class="card">
+    <h2><i class="fa-solid fa-lightbulb"></i> Thoughts</h2>
+    <ul>
+      <li>Automation should reduce effort, not add chaos.</li>
+      <li>Cloud systems must plan for failure too.</li>
+      <li>Keep it practical, keep it reliable.</li>
+    </ul>
+
+     <div style="text-align:center;margin-top:14px;">
+       <a class="btn" href="thoughts/index.html">Read Thoughts</a>
+     </div>
+  </section>
+
+  <section id="contact" class="card" style="text-align:center;">
+    <h2 style="justify-content:center;"><i class="fa-solid fa-link"></i> Connect</h2>
+    <p>
+      <a href="#" style="margin:0 8px;"><i class="fa-brands fa-linkedin" style="font-size:21px;"></i></a>
+      <a href="#" style="margin:0 8px;"><i class="fa-brands fa-github" style="font-size:21px;"></i></a>
+      <a href="mailto:swapnil@example.com" style="margin:0 8px;"><i class="fa-solid fa-envelope" style="font-size:21px;color:#7a38ff;"></i></a>
+    </p>
+  </section>
+
+  <div class="footer">Built and hosted for free using GitHub Pages</div>
+
+</div>
 
 <script>
-  /* MAGIC SPARKLE TRAIL */
-  document.addEventListener("mousemove", (e) => {
-    const particle = document.createElement("div");
-    particle.className = "cursor-trail";
-    particle.style.background = "rgba(150,60,255,0.7)";
-    particle.style.left = e.clientX + "px";
-    particle.style.top = e.clientY + "px";
-    document.body.appendChild(particle);
-    setTimeout(() => particle.remove(), 1200);
-  });
-
-  /* VIOLET MOUSE GRADIENT FOLLOW */
-  const bg = document.getElementById("mouseBg");
-  document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth) * 100;
-    const y = (e.clientY / window.innerHeight) * 100;
-    bg.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(148,0,211,0.38), rgba(75,0,130,0.42), transparent 68%)`;
-  });
+// Mouse glow reposition
+const glow = document.getElementById("mouseGlow");
+window.addEventListener("mousemove", e => {
+  const x = (e.clientX / innerWidth) * 100;
+  const y = (e.clientY / innerHeight) * 100;
+  glow.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(148,0,211,0.3), rgba(75,0,130,0.35), transparent 68%)`;
+});
 </script>
+
+<!-- Add icon support -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 
 </body>
 </html>
