@@ -1,66 +1,108 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portfolio and Resume | Swapnil Khot</title>
+
   <style>
-    body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:20px; }
-    .container { max-width: 900px; margin:auto; background:#fff; padding:20px 24px; border-radius:6px; }
-    h1 { margin-bottom:5px; }
-    .subtitle { color:#666; margin-top:0; }
-    h2 { margin-top:24px; }
-    ul { padding-left:20px; }
-    .btn { display:inline-block; margin-top:10px; padding:10px 16px; background:#007bff; color:#fff; text-decoration:none; border-radius:4px; }
+    body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:0; color:#222; }
+    .container { max-width:1000px; margin:auto; padding:25px 18px; }
+    .hero { text-align:center; padding:35px 10px; }
+    .hero h1 { font-size:32px; margin-bottom:6px; }
+    .hero p { font-size:17px; color:#555; margin-top:0; }
+    .nav { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:14px; }
+    .nav a { text-decoration:none; color:#007bff; font-size:15px; padding:6px 8px; }
+    .nav a:hover { text-decoration:underline; }
+    .btn { display:inline-block; margin-top:12px; padding:10px 16px; background:#007bff; color:#fff; text-decoration:none; border-radius:4px; font-size:15px; }
     .btn:hover { opacity:0.9; }
-    a { color:#007bff; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .nav { margin-bottom:20px; }
-    .nav a { margin-right:12px; }
+    .card { background:#fff; padding:16px 20px; border-radius:6px; margin-bottom:16px; box-shadow:0 2px 5px rgba(0,0,0,0.04); }
+    .card h2 { font-size:19px; margin-top:0; margin-bottom:8px; }
+    .card p, .card li { font-size:15px; line-height:1.5; }
+    ul { padding-left:20px; margin:4px 0; }
+    .footer { text-align:center; font-size:13px; color:#666; padding-top:20px; }
+    @media(max-width:768px) {
+      .hero h1 { font-size:26px; }
+      .nav a { font-size:14px; }
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>Swapnil Khot</h1>
-    <p class="subtitle">CRM Technical Developer | AWS | Azure | Linux | DevOps</p>
 
-    <div class="nav">
-      <a href="index.html">Home</a>
-      · <a href="projects/index.html">Projects</a>
-      · <a href="thoughts/index.html">Thoughts</a>
+    <div class="hero">
+      <h1>Swapnil Khot</h1>
+      <p>CRM Technical Developer | Cloud and DevOps</p>
+
+      <div class="nav">
+        <a href="#about">About</a>
+        · <a href="#skills">Skills</a>
+        · <a href="#certificates">Certificates</a>
+        · <a href="#projects">Projects</a>
+        · <a href="#thoughts">Thoughts</a>
+      </div>
+
+      <a class="btn" href="Swapnil_Khot_Resume.pdf" download>Download Resume</a>
     </div>
 
-    <h2>About</h2>
-    <p>
-      I am a CRM technical developer working with Microsoft Dynamics, .NET, cloud platforms
-      (AWS & Azure), and DevOps tools. I enjoy solving real-world problems and building clean,
-      maintainable solutions.
-    </p>
+    <section id="about" class="card">
+      <h2>About Me</h2>
+      <p>
+        I work on :contentReference[oaicite:0]{index=0} Dynamics CRM and backend/cloud integrations.
+        I enjoy API design, solving integration issues, and learning infra tools on :contentReference[oaicite:1]{index=1} like AWS and Azure.
+      </p>
+    </section>
 
-    <h2>Skills</h2>
-    <ul>
-      <li>MS Dynamics CRM, Plugins, Customizations</li>
-      <li>.NET / C#, Web API</li>
-      <li>AWS, Azure, Linux</li>
-      <li>Git, GitHub, CI/CD basics</li>
-    </ul>
+    <section id="skills" class="card">
+      <h2>Skills</h2>
+      <ul>
+        <li>C#, :contentReference[oaicite:2]{index=2}</li>
+        <li>:contentReference[oaicite:3]{index=3} Services (EC2, RDS, Auto Scaling)</li>
+        <li>:contentReference[oaicite:4]{index=4} Basics</li>
+        <li>:contentReference[oaicite:5]{index=5} / GitHub</li>
+        <li>Linux and CI/CD basics</li>
+      </ul>
+    </section>
 
-    <h2>Resume</h2>
-    <a class="btn" href="Swapnil_Khot_Resume.pdf" target="_blank">View / Download Resume (PDF)</a>
+    <section id="certificates" class="card">
+      <h2>Certifications</h2>
+      <p>Organized by learning tracks:</p>
+      <ul>
+        <li>📂 <a href="certificates/AWS/">AWS Certificates</a></li>
+        <li>📂 <a href="certificates/Microsoft/">Microsoft Certificates</a></li>
+        <li>📂 <a href="certificates/Google/">Google Certificates</a></li>
+      </ul>
+    </section>
 
-    <h2>Certificates</h2>
-    <ul>
-      <li><a href="certificates/AWS_CloudPractitioner.pdf" target="_blank">AWS Cloud Practitioner</a></li>
-      <li><a href="certificates/Azure_Fundamentals.pdf" target="_blank">Azure Fundamentals</a></li>
-      <li><a href="certificates/MSDynamics_Customization.pdf" target="_blank">MS Dynamics Customization</a></li>
-    </ul>
+    <section id="projects" class="card">
+      <h2>Projects</h2>
+      <ul>
+        <li><b>AWS HA Migration</b> – Improved uptime using EC2 Auto Scaling and Load Balancer.</li>
+        <li><b>RentAPlace</b> – Rental backend API, role access and file/image uploads.</li>
+        <li><b>CRM Cloud Integrations</b> – Connected services reliably between CRM and cloud.</li>
+      </ul>
+    </section>
 
-    <h2>Contact</h2>
-    <p>
-      <a href="https://www.linkedin.com" target="_blank">LinkedIn</a> ·
-      <a href="https://github.com" target="_blank">GitHub</a> ·
-      <a href="mailto:your-email@example.com">Email</a>
-    </p>
+    <section id="thoughts" class="card">
+      <h2>Thoughts</h2>
+      <p>I keep short notes and technical learnings under:</p>
+      <a class="btn" href="thoughts/index.html">Go to Thoughts</a>
+    </section>
+
+    <section id="connect" class="card">
+      <h2>Connect</h2>
+      <p>
+        <a href="#">LinkedIn</a> ·
+        <a href="#">GitHub</a> ·
+        <a href="#">Email</a>
+      </p>
+    </section>
+
+    <div class="footer">
+      Built and hosted for free using GitHub Pages
+    </div>
+
   </div>
 </body>
 </html>
