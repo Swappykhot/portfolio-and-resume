@@ -3,89 +3,83 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Portfolio and Resume | Swapnil Khot</title>
+<title>Portfolio | Swapnil Khot</title>
 
-<!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
 <style>
-
-/* --- FULL PAGE BASE --- */
+/* Hide default system cursor */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: Arial, sans-serif;
-  background: #ffffff;
-  color: #1a0f2e;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
+  font-family: "Inter", Arial, sans-serif;
+  background: #f9f6ff;
+  color: #2a1a4a;
 }
 
-/* --- VIOLET MAGIC BACKGROUND FOLLOWING MOUSE --- */
+body {
+  cursor: none;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  position: relative;
+  padding: 0;
+}
+
+/* Persistent violet background glow */
 #mouseGlow {
   position: fixed;
   inset: 0;
-  z-index: -10;
-  background: radial-gradient(800px circle at 50% 50%, rgba(148,0,255,0.14), rgba(75,0,130,0.12), transparent 80%);
+  z-index: -50;
   pointer-events: none;
-  transition: 0.1s ease-out;
+  background: radial-gradient(700px circle at 50% 50%, rgba(148,0,255,0.17), rgba(75,0,130,0.14), transparent 78%);
+  transition: 0.12s linear;
 }
 
-/* --- MICRO SPARKLE GLITTER TAIL FOR CURSOR --- */
-.spark {
+/* Magic sparkle dissipating glitter */
+.sparkle {
   position: fixed;
-  width: 4px;
-  height: 4px;
   border-radius: 50%;
   pointer-events: none;
-  opacity: 0.9;
-  animation: glitter 1.1s ease-out forwards;
-  z-index: 9999;
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(180,90,255,0.8);
 }
 
-@keyframes glitter {
-  0% {
-    transform: scale(1) translate(0, 0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(3.6) translate(var(--x), var(--y));
-    opacity: 0;
-  }
-}
-
-/* --- LAYOUT WRAPPER --- */
+/* Layout */
 .container {
-  width: 100%;
-  max-width: 1200px;
+  max-width: 1080px;
   margin: auto;
-  padding: 12px 22px 40px 22px;
-  position: relative;
+  padding: 70px 20px 40px;
   z-index: 2;
 }
 
-/* --- HERO HEADER --- */
+/* Hero */
 .hero {
-  padding: 70px 20px 40px;
   text-align: center;
-  border-radius: 6px;
-  transition: 0.4s ease;
+  margin-bottom: 38px;
 }
 
 .hero h1 {
-  font-size:42px;
-  margin-bottom:5px;
-  font-weight:600;
-  color:#4b0082;
+  font-size: 44px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #4b0082;
+  transition: 0.32s ease-out;
 }
 
-/* --- NAVIGATION --- */
+.hero .subtext {
+  font-size: 16px;
+  color: #6a4c9c;
+  margin-bottom: 22px;
+  font-weight: 500;
+}
+
+/* Nav */
 .nav {
   display: flex;
   justify-content: center;
-  gap: 22px;
+  gap: 26px;
   flex-wrap: wrap;
   margin-bottom: 42px;
 }
@@ -95,103 +89,110 @@ html, body {
   font-weight: 600;
   text-decoration: none;
   color: #7a38ff;
-  transition: 0.3s;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
+  transition: 0.28s;
 }
 
 .nav a:hover {
-  transform: scale(1.15);
+  transform: scale(1.18);
   color: #4b0082;
   text-decoration: underline;
 }
 
-/* --- PORTFOLIO SQUARE CARDS --- */
-.card {
-  background:#fff;
-  padding:22px 28px;
-  border-radius:10px;
-  margin-bottom:22px;
-  border:1px solid rgba(122,56,255,0.08);
-  box-shadow:0 2px 12px rgba(122,56,255,0.05);
-  transition:0.35s;
-  text-align: center;
+/* Section Cards (square style containers) */
+.section {
+  background: white;
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  border: 1.6px solid rgba(122,56,255,0.09);
+  box-shadow: 0 0 18px rgba(122,56,255,0.05);
+  transition: 0.3s ease-out;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: reveal 0.7s ease forwards;
 }
 
-.card:hover {
-  transform: translateY(-3px) scale(1.025);
-  box-shadow: 0 0 40px rgba(128,0,230,0.18);
-  border-color: rgba(138,43,226,0.28);
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.card h2 {
-  font-size:20px;
-  font-weight:700;
-  color:#4b0082;
-  margin-top:0;
-  margin-bottom:10px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
+.section:hover {
+  transform: scale(1.02) translateY(-2px);
+  box-shadow: 0 0 44px rgba(128,0,230,0.15), 0 8px 24px rgba(122,56,255,0.14);
+  border-color: rgba(138,43,226,0.26);
 }
 
-/* --- BUTTON --- */
+.section h2 {
+  font-size: 20px;
+  font-weight: 630;
+  margin-top: 0;
+  margin-bottom: 11px;
+  color: #4b0082;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
 .btn {
-  display:inline-flex;
-  background:#7a38ff;
-  color:#fff;
-  padding:12px 22px;
-  border-radius:6px;
-  font-size:15px;
-  font-weight:600;
-  text-decoration:none;
-  transition:0.3s;
-  gap:8px;
-  align-items:center;
+  display: inline-flex;
+  background: #7a38ff;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 7px;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-decoration: none;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  transition: 0.28s;
 }
 
 .btn:hover {
-  transform: scale(1.14);
+  transform: scale(1.07) translateY(-2px);
+  box-shadow: 0 0 35px rgba(180,90,255,0.4);
   background: #6a2bd9;
-  box-shadow: 0 0 32px rgba(200,140,255,0.42);
 }
 
-/* --- CERT ICON BUTTON GROUP --- */
-.badges {
-  display:flex;
-  gap:20px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-top:20px;
+/* Square Grid for icons or folder links later */
+.grid {
+  display: grid;
+  justify-content: center;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, 150px);
+  margin-top: 14px;
 }
 
-.badges div {
-  width:70px;
-  height:70px;
-  border-radius:50%;
+.box {
+  width:150px;
+  height:150px;
+  border-radius:21px;
   background:white;
-  border:1px solid rgba(122,56,255,0.15);
+  border:1.6px solid rgba(122,56,255,0.12);
+  box-shadow:0 3px 12px rgba(122,56,255,0.02);
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:28px;
+  font-size:48px;
   color:#7a38ff;
   cursor:pointer;
-  transition:0.28s;
-  box-shadow:0 0 14px rgba(122,56,255,0.05);
+  transition:0.3s ease-out;
 }
 
-.badges div:hover {
-  transform: scale(1.21) rotate(4deg);
+.box:hover {
+  transform:scale(1.12) rotate(5deg);
   background:#7a38ff;
   color:white;
-  box-shadow:0 0 24px rgba(200,80,255,0.38), 0 0 42px rgba(75,0,130,0.21);
+  box-shadow:0 0 24px rgba(186,85,211,0.38), 0 0 42px rgba(75,0,130,0.21);
   border-color:#7a38ff;
 }
 
-/* --- SOCIAL ICONS --- */
+/* Social icons */
 .social {
   display:flex;
   gap:28px;
@@ -207,28 +208,31 @@ html, body {
 
 .social a:hover i {
   transform:scale(1.22) rotate(3deg);
-  filter:brightness(1.3);
+  filter:brightness(1.25);
 }
 
-/* --- FOOTER --- */
+/* Footer */
 .footer {
-  margin-top:38px;
-  font-size:13.8px;
+  text-align:center;
+  font-size:14px;
+  margin-top:28px;
   color:#551a8b;
   font-weight:500;
-  opacity:0.9;
 }
-
 </style>
 </head>
 
 <body>
-
 <div id="mouseGlow"></div>
 
 <div class="container">
   <header class="hero">
     <h1>Swapnil Khot</h1>
+    <div class="subtext">
+      :contentReference[oaicite:0]{index=0} + 
+      :contentReference[oaicite:1]{index=1} + 
+      :contentReference[oaicite:2]{index=2}
+    </div>
   </header>
 
   <nav class="nav">
@@ -237,50 +241,48 @@ html, body {
     <a href="#certificates">Certifications</a>
     <a href="#projects">Projects</a>
     <a href="#thoughts">Thoughts</a>
-    <a href="#contact">Connect</a>
+    <a href="#connect">Connect</a>
   </nav>
 
-  <section id="about" class="card">
+  <section id="about" class="section">
     <h2><i class="fa-solid fa-user"></i>About</h2>
-    <p>I build backend logic, CRM customizations, APIs, and cloud automations with a focus on reliability.</p>
+    <p>Backend systems, :contentReference[oaicite:3]{index=3} integration, CRM plugins and cloud automation.</p>
   </section>
 
-  <section id="skills" class="card">
+  <section id="skills" class="section">
     <h2><i class="fa-solid fa-code"></i>Skills</h2>
-    <ul style="list-style:none;padding:0;font-size:15.2px;">
-      <li>CRM Plugin Development</li>
-      <li>C#, .NET Core Web API</li>
-      <li>AWS and Azure Core Services</li>
-      <li>Linux CLI, CI/CD Basics</li>
-    </ul>
-  </section>
-
-  <section id="certificates" class="card">
-    <h2><i class="fa-solid fa-certificate"></i>Certifications</h2>
-    <div class="badges">
-      <a href="certificates/AWS/" class="btn"><i class="fa-brands fa-aws"></i>AWS</a>
-      <a href="certificates/Microsoft/" class="btn"><i class="fa-brands fa-microsoft"></i>Microsoft</a>
-      <a href="certificates/Google/" class="btn"><i class="fa-brands fa-google"></i>Google</a>
+    <div class="grid">
+      <div class="box"><i class="fa-brands fa-aws"></i></div>
+      <div class="box"><i class="fa-brands fa-microsoft"></i></div>
+      <div class="box"><i class="fa-brands fa-google"></i></div>
+      <div class="box"><i class="fa-solid fa-terminal"></i></div>
+      <div class="box"><i class="fa-brands fa-github"></i></div>
     </div>
   </section>
 
-  <section id="projects" class="card">
-    <h2><i class="fa-solid fa-folder"></i>Projects</h2>
-    <ul style="list-style:none;padding:0;font-size:15.2px;">
-      <li>High Availability Setup on Cloud</li>
-      <li>CRM Plugin Automations</li>
-      <li>Backend API Cloud Integration</li>
-    </ul>
-    <a class="btn" href="projects/index.html"><i class="fa-solid fa-arrow-right"></i>Open Projects</a>
+  <section id="certificates" class="section">
+    <h2><i class="fa-solid fa-award"></i>Certificates</h2>
+    <p>Click to open certification folders:</p>
+    <div class="badges">
+      <a class="btn" href="certificates/aws/index.html"><i class="fa-brands fa-aws"></i>AWS</a>
+      <a class="btn" href="certificates/microsoft/index.html"><i class="fa-brands fa-microsoft"></i>Microsoft</a>
+      <a class="btn" href="certificates/google/index.html"><i class="fa-brands fa-google"></i>Google</a>
+    </div>
   </section>
 
-  <section id="thoughts" class="card">
+  <section id="projects" class="section">
+    <h2><i class="fa-solid fa-folder"></i>Projects</h2>
+    <p>Cloud infra, backend APIs and CRM automation.</p>
+    <a class="btn" href="projects/index.html"><i class="fa-solid fa-arrow-right"></i>Explore Projects</a>
+  </section>
+
+  <section id="thoughts" class="section">
     <h2><i class="fa-solid fa-lightbulb"></i>Thoughts</h2>
-    <p style="font-size:15.2px;">Practical notes on architecture, infra, and automation.</p>
+    <p>Short practical tech notes, learnings, architecture thinking.</p>
     <a class="btn" href="thoughts/index.html"><i class="fa-solid fa-book"></i>Read Thoughts</a>
   </section>
 
-  <section id="contact" class="card">
+  <section id="connect" class="section">
     <h2><i class="fa-solid fa-link"></i>Connect</h2>
     <div class="social">
       <a href="#"><i class="fa-brands fa-linkedin"></i></a>
@@ -289,33 +291,60 @@ html, body {
     </div>
   </section>
 
-  <div class="footer">Built and hosted free using GitHub Pages.</div>
+  <div class="footer">Built and hosted free using GitHub Pages</div>
 </div>
 
 <script>
+// MAGIC SPARKLE DUST TRAIL
+const colors = [
+  "#FFD700",      /* Gold */
+  "#FF69B4",      /* Hot Pink */
+  "#1E90FF",      /* Vibrant Blue */
+  "#8A2BE2",      /* Violet */
+  "#00FFFF"       /* Cyan */
+];
 
-/* --- Elegant micro fine sparkle tail following cursor path --- */
-document.addEventListener("mousemove", (e) => {
-  const spark = document.createElement("div");
-  spark.className = "spark";
-  const hue = Math.random() * 40 + 270;
-  spark.style.background = `hsl(${hue}, 100%, 82%)`;
-  spark.style.setProperty("--x", (Math.random()*26-13)+"px");
-  spark.style.setProperty("--y", (Math.random()*30-20)+"px");
-  spark.style.left = e.clientX + "px";
-  spark.style.top  = (e.clientY - 5) + "px";
-  document.body.appendChild(spark);
-  setTimeout(() => spark.remove(), 800);
+window.addEventListener("mousemove", (e) => {
+  for (let i = 0; i < 2; i++) { // 2 sparkles per movement frame (fine grain)
+    const sparkle = document.createElement("div");
+    sparkle.className="sparkle";
+    sparkle.style.width = sparkle.style.height = (Math.random() * 2.2 + 2.4) + "px";
+    sparkle.style.background = colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(sparkle);
+
+    const offsetX = Math.random() * 12 - 6;
+    const offsetY = Math.random() * 12 - 6;
+    const startX = e.clientX + offsetX;
+    const startY = e.clientY + offsetY;
+
+    sparkle.style.left = startX + "px";
+    sparkle.style.top  = startY + "px";
+
+    const moveX = (Math.random() * 20 - 10);
+    const moveY = (Math.random() * 24 - 38);
+    const scaleStart = Math.random() * 0.6 + 0.9;
+    const scaleEnd   = 0;
+
+    sparkle.animate([
+      { opacity: 1, transform: `translate(0px,0px) scale(${scaleStart})` },
+      { opacity: 0, transform: `translate(${moveX}px,${moveY}px) scale(${scaleEnd})` }
+    ], {
+      duration: 760,
+      easing: "ease-out"
+    });
+
+    setTimeout(()=> sparkle.remove(), 760);
+  }
 });
 
-/* --- Violet glow follow --- */
-const mg = document.getElementById("mouseGlow");
+// POINTER BG GLOW TRACK (no tail)
+const bg = document.getElementById("mouseGlow");
 window.addEventListener("mousemove", e => {
   const x = (e.clientX / innerWidth) * 100;
   const y = (e.clientY / innerHeight) * 100;
-  mg.style.background = `radial-gradient(900px circle at ${x}% ${y}%, rgba(138,43,226,0.27), rgba(75,0,130,0.3), transparent 66%)`;
+  bg.style.background = `radial-gradient(900px circle at ${x}% ${y}%, rgba(138,43,226,0.22), rgba(75,0,130,0.25), transparent 66%)`;
 });
-
 </script>
+
 </body>
 </html>
