@@ -1,284 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Portfolio & Resume | Swapnil Khot</title>
+<title>Portfolio and Resume | Swapnil Khot</title>
 
+<!-- ICONS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
 <style>
-
-/* --- Full page base --- */
+/* FULL PAGE */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  font-family: Poppins, Arial, sans-serif;
-  background: #f9f6ff;
-  color: #2a1a4a;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #1a0f2e;
   scroll-behavior: smooth;
-  overflow-x: hidden;
 }
 
-/* --- Smooth violet glow circle following cursor --- */
-#magicPointer {
+/* VIOLET MAGIC BACKGROUND FOLLOWING MOUSE */
+#mouseGlow {
   position: fixed;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid rgba(180,90,255,0.6);
-  box-shadow: 0 0 20px rgba(180,90,255,0.5), 0 0 40px rgba(128,0,255,0.3);
-  transform: translate(-50%, -50%);
+  inset: 0;
+  z-index: -100;
+  background: radial-gradient(circle at 50% 50%, rgba(148,0,211,0.2), rgba(75,0,130,0.22), transparent 70%);
+  transition: 0.15s ease-out;
   pointer-events: none;
-  z-index: 99999;
-  transition: 0.05s linear;
 }
 
-/* --- Micro fine sparkle elements --- */
-.sparkle {
+/* SPARKLE DOT TRAIL */
+.cursor-dot {
   position: fixed;
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: rgba(186,85,211,0.9);
-  box-shadow: 0 0 7px rgba(186,85,211,0.8), 0 0 14px rgba(138,43,226,0.4);
-  animation: sparkleAnim 1.5s ease-out forwards;
-  z-index: 99998;
+  background: rgba(148,0,255,0.85);
   pointer-events: none;
-  opacity: 0.7;
+  box-shadow: 0 0 10px rgba(148,0,255,0.8), 0 0 20px rgba(75,0,130,0.4);
+  animation: sparkleMove 1s ease-out forwards;
+  z-index: 9999;
 }
 
-@keyframes sparkleAnim {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(4) translateY(-18px); }
+@keyframes sparkleMove {
+  0% { opacity: 1; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(3.2) translateY(-25px); }
 }
 
-/* --- Hero section --- */
+/* HERO HEADER */
 .hero {
+  padding: 70px 20px 40px;
   text-align: center;
-  padding: 80px 20px 30px;
+  border-radius: 6px;
+  transition: 0.4s ease;
+  cursor: default;
 }
 
-.hero h1 {
-  font-size: 42px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #4b0082;
+.hero:hover {
+  background: linear-gradient(145deg,#8a2be2,#4b0082);
+  color: white;
+  transform: scale(1.02);
+  box-shadow: 0 0 60px rgba(138,43,226,0.5);
 }
 
-.hero .subtext {
-  font-size: 17px;
-  color: #6a4c9c;
-  margin-bottom: 20px;
-}
-
-/* --- Navigation --- */
+/* NAV */
 .nav {
   display: flex;
-  gap: 24px;
   justify-content: center;
+  gap: 22px;
   flex-wrap: wrap;
-  margin-top: 10px;
-  margin-bottom: 40px;
+  margin-bottom: 42px;
 }
-
 .nav a {
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
   color: #7a38ff;
-  display: flex;
-  align-items: center;
-  gap: 7px;
   transition: 0.3s;
 }
-
 .nav a:hover {
+  color: #4b1d87;
   transform: scale(1.15);
-  color: #4b0082;
   text-decoration: underline;
 }
 
-/* --- Grid wrapper for square portfolio cards --- */
-.section {
+/* CONTENT CARDS */
+.container {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
-  padding: 10px 20px 40px 20px;
+  padding: 12px 22px 40px 22px;
 }
 
-.section h2 {
-  font-size: 22px;
-  font-weight: 600;
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 28px 34px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(148,0,211,0.12);
+  box-shadow: 0 2px 12px rgba(148,0,211,0.08);
+  transition: 0.35s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(138,43,226,0.4), 0 10px 25px rgba(75,0,130,0.18);
+  border-color: rgba(138,43,226,0.55);
+}
+
+.card h2 {
+  font-size: 21px;
+  font-weight: 700;
   color: #4b0082;
-  text-align: center;
-  margin-bottom: 16px;
+  margin-top:0;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.grid {
-  display: grid;
-  justify-content: center;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, 150px);
-  margin-top: 14px;
+.card p, .card li {
+  font-size: 16px;
+  line-height: 1.64;
+  color: #2d1b4b;
 }
 
-.box {
-  width: 150px;
-  height: 150px;
-  border-radius: 18px;
-  background: white;
-  border: 2px solid rgba(122,56,255,0.12);
-  box-shadow: 0 3px 12px rgba(122,56,255,0.05);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 52px;
-  color: #7a38ff;
-  cursor: pointer;
-  transition: 0.35s ease-out;
-  animation: fadeIn 0.7s ease forwards;
-  opacity: 0;
-  transform: translateY(16px);
-}
+ul { padding-left:22px; margin-top:4px; }
 
-@keyframes fadeIn {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.box:hover {
-  transform: translateY(-4px) scale(1.07);
-  border-color: rgba(186,85,211,0.35);
-  box-shadow: 0 0 40px rgba(186,85,211,0.32), 0 0 18px rgba(138,43,226,0.21);
-  background: #7a38ff;
-  color: white;
-}
-
-/* --- Button for resume --- */
+/* BUTTON */
 .btn {
   display: inline-flex;
-  background: #7a38ff;
-  padding: 13px 22px;
-  border-radius: 7px;
+  background:#7a00d9;
   color:white;
-  font-size: 14.5px;
-  font-weight: 600;
-  text-decoration: none;
-  gap: 8px;
-  transition: 0.3s;
+  padding:12px 22px;
+  border-radius:6px;
+  font-size:15px;
+  font-weight:600;
+  text-decoration:none;
+  transition:0.3s;
+  gap:8px;
+  align-items:center;
 }
 
 .btn:hover {
-  transform: scale(1.08) translateY(-2px);
-  box-shadow: 0 0 34px rgba(180,90,255,0.47);
+  transform: scale(1.15) translateY(-2px);
   background: #6a2bd9;
+  box-shadow: 0 0 35px rgba(200,140,255,0.5);
 }
 
-.footer {
-  text-align:center;
-  font-size:14px;
-  margin-top:20px;
-  color:#551a8b;
+/* CERT CATEGORY ICONS */
+.badges {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
+.badges div {
+  width:60px;
+  height:60px;
+  border-radius:14px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: #fff;
+  font-size:27px;
+  border:1px solid rgba(128,0,255,0.2);
+  box-shadow:0 0 12px rgba(128,0,255,0.08);
+  cursor:pointer;
+  transition:0.3s;
+  color:#7a38ff;
+}
+
+.badges div:hover {
+  transform: rotate(8deg) scale(1.18);
+  background: #7a38ff;
+  color:white;
+  box-shadow: 0 0 20px rgba(122,56,255,0.43);
+  border-color:#7a38ff;
+}
 </style>
 </head>
 
 <body>
-<div id="magicPointer"></div>
 
-<div class="hero">
-  <h1>Swapnil Khot</h1>
-  <div class="subtext">CRM Technical Developer | :contentReference[oaicite:1]{index=1} | :contentReference[oaicite:2]{index=2} | :contentReference[oaicite:3]{index=3}</div>
-  <a class="btn" href="Swapnil_Khot_Resume.pdf" download><i class="fa-solid fa-download"></i>Resume (PDF)</a>
-</div>
+<div id="mouseGlow"></div>
 
-<nav class="nav">
-  <a href="#about"><i class="fa-solid fa-user"></i>About</a>
-  <a href="#skills"><i class="fa-solid fa-code"></i>Skills</a>
-  <a href="#certificates"><i class="fa-solid fa-award"></i>Certificates</a>
-  <a href="#projects"><i class="fa-solid fa-folder"></i>Projects</a>
-  <a href="#thoughts"><i class="fa-solid fa-lightbulb"></i>Thoughts</a>
-</nav>
+<div class="container">
+  <header class="hero">
+    <h1 style="font-size:42px;margin-bottom:5px">Swapnil Khot</h1>
+    <div style="font-size:18px;color:#6a4c9c;margin-bottom:18px" class="subtitle">
+      CRM Technical Developer | AWS | Azure | Linux | DevOps
+    </div>
+  </header>
 
-<div class="section">
+  <nav class="nav">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#certificates">Certifications</a>
+    <a href="#projects">Projects</a>
+    <a href="#thoughts">Thoughts</a>
+  </nav>
+
   <section id="about" class="card">
-    <h2>About</h2>
-    <p style="font-size:16px;text-align:center;line-height:1.7;">
-      I work on backend, CRM plugins, APIs and cloud automation. I enjoy solving integration problems and building reliable systems.
-    </p>
+    <h2><i class="fa-solid fa-user"></i> About</h2>
+    <p>I work on backend, CRM customizations and cloud integrations, focused on building reliable systems.</p>
   </section>
 
   <section id="skills" class="card">
-    <h2>Skills</h2>
-    <div class="grid">
-      <div class="box"><i class="fa-brands fa-aws"></i></div>
-      <div class="box"><i class="fa-brands fa-microsoft"></i></div>
-      <div class="box"><i class="fa-brands fa-google"></i></div>
-      <div class="box"><i class="fa-solid fa-terminal"></i></div>
-      <div class="box"><i class="fa-brands fa-github"></i></div>
-    </div>
-  </section>
-
-  <section id="certificates" class="card">
-    <h2>Certificates</h2>
-    <p style="font-size:16px;text-align:center;">Open certificate folders:</p>
-    <ul style="list-style:none;text-align:center;padding:0;margin-top:10px;font-size:15px;">
-      <li>📁 <a href="certificates/AWS/">AWS</a></li>
-      <li>📁 <a href="certificates/Microsoft/">Microsoft</a></li>
-      <li>📁 <a href="certificates/Google/">Google</a></li>
+    <h2><i class="fa-solid fa-code"></i> Skills</h2>
+    <ul>
+      <li>CRM Plugin development and automation</li>
+      <li>C#, .NET Core Web APIs</li>
+      <li>AWS and Azure core services</li>
+      <li>Linux CLI, CI/CD basics</li>
     </ul>
   </section>
 
+  <section id="certificates" class="card">
+    <h2><i class="fa-solid fa-certificate"></i> Certifications</h2>
+    <p>Certification categories:</p>
+    <div class="badges">
+      <div><i class="fa-brands fa-aws"></i></div>
+      <div><i class="fa-brands fa-microsoft"></i></div>
+      <div><i class="fa-brands fa-google"></i></div>
+    </div>
+    <div style="text-align:center;margin-top:20px;">
+      <a class="btn" href="certificates/index.html">View Certificates</a>
+    </div>
+  </section>
+
   <section id="projects" class="card">
-    <h2>Projects</h2>
-    <p style="font-size:15px;text-align:center;margin-bottom:14px;">
-      Cloud infrastructure, backend APIs, CRM automation and integration work.
-    </p>
-    <div class="grid">
-      <div class="box"><i class="fa-solid fa-cloud"></i></div>
-      <div class="box"><i class="fa-solid fa-database"></i></div>
-      <div class="box"><i class="fa-solid fa-server"></i></div>
+    <h2><i class="fa-solid fa-folder"></i> Projects</h2>
+    <ul>
+      <li><b>AWS High Availability Migration</b> - scalable EC2 setup with load balancing</li>
+      <li><b>RentAPlace Backend</b> - role based access, file uploads</li>
+      <li><b>CRM Cloud Integration</b> - connected backend APIs with cloud services</li>
+    </ul>
+    <div style="text-align:center;margin-top:15px;">
+      <a class="btn" href="projects/index.html">Open Projects</a>
     </div>
   </section>
 
   <section id="thoughts" class="card">
-    <h2>Thoughts</h2>
-    <p style="font-size:16px;text-align:center;margin-bottom:14px;">
-      Sharing practical notes on architecture, infra and automation.
-    </p>
-    <div class="grid">
-      <div class="box"><i class="fa-solid fa-book"></i></div>
-      <div class="box"><i class="fa-solid fa-pen"></i></div>
-      <div class="box"><i class="fa-solid fa-brain"></i></div>
+    <h2><i class="fa-solid fa-lightbulb"></i> Thoughts</h2>
+    <ul>
+      <li>Automation should reduce effort, not add confusion.</li>
+      <li>Cloud is planning for failures too, not just deployment.</li>
+      <li>Simplicity is underrated in large systems.</li>
+    </ul>
+    <div style="text-align:center;margin-top:15px;">
+      <a class="btn" href="thoughts/index.html">Read Thoughts</a>
     </div>
   </section>
-</div>
 
-<div class="footer">
-  Built and hosted lifetime free using GitHub Pages.
+  <div class="footer">
+    Built and hosted for free using GitHub Pages.
+  </div>
 </div>
 
 <script>
-
-/* Cursor glow track + sparkles on movement */
-document.addEventListener("mousemove", (e) => {
-  const p = document.getElementById("magicPointer");
-  p.style.left = e.clientX + "px";
-  p.style.top  = e.clientY + "px";
-
-  if (Math.random() < 0.32) {
-    const spark = document.createElement("div");
-    spark.className="sparkle";
-    spark.style.left = e.clientX + "px";
-    spark.style.top  = (e.clientY - 6) + "px";
-    document.body.appendChild(spark);
-    setTimeout(()=> spark.remove(), 1000);
-  }
+// Gradient follows mouse
+window.addEventListener("mousemove", (e) => {
+  const x = (e.clientX / window.innerWidth) * 100;
+  const y = (e.clientY / window.innerHeight) * 100;
+  document.getElementById("mouseGlow").style.background =
+    `radial-gradient(circle at ${x}% ${y}%, rgba(128,0,255,0.34), rgba(75,0,130,0.37), transparent 63%)`;
 });
-
 </script>
 
 </body>
