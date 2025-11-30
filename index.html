@@ -7,182 +7,252 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f7f9fc;
       margin: 0;
       padding: 0;
-      transition: 0.3s ease;
-      background: #f4f6f8;
-      overflow-x: hidden;
+      transition: background 0.4s ease;
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 1050px;
       margin: auto;
-      padding: 28px 18px;
+      padding: 30px 18px;
     }
 
     .hero {
       text-align: center;
-      padding: 35px 8px;
-      border-radius: 8px;
+      padding: 60px 20px;
+      border-radius: 6px;
       background: white;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      margin-bottom: 28px;
       transition: 0.3s ease;
-      cursor: default;
     }
 
     .hero:hover {
-      background: linear-gradient(135deg, #007bff, #00c6ff);
+      background: linear-gradient(135deg, #2b7fff, #6dc7ff);
       color: white;
-      transform: scale(1.02);
+      transform: scale(1.01);
+    }
+
+    .hero .subtitle {
+      color:#555;
+      font-size:18px;
+      transition:0.3s;
     }
 
     .hero:hover .subtitle {
-      color: #e6f0ff;
+      color:#e8f1ff;
     }
 
-    .hero h1 {
-      font-size: 32px;
-      margin-bottom: 6px;
-      transition: 0.3s ease;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      color: #555;
-      transition: 0.3s ease;
+    .nav {
+      margin-top: 20px;
     }
 
     .nav a {
-      margin: 0 10px;
       text-decoration: none;
-      font-size: 15px;
-      color: inherit;
-      transition: 0.3s ease;
+      color:#2b7fff;
+      margin: 0 14px;
+      font-size: 16px;
+      font-weight: 500;
     }
-
-    .nav a:hover {
-      text-decoration: underline;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 18px;
-      background: #007bff;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 15px;
-      margin-top: 12px;
-      transition: 0.3s ease;
-    }
-
-    .btn:hover {
-      background: linear-gradient(90deg, #007bff, #00c6ff);
-      transform: scale(1.07);
-      box-shadow: 0 2px 10px rgba(0,123,255,0.25);
-    }
+    .nav a:hover { text-decoration: underline; }
 
     .card {
+      position: relative;
       background: white;
-      padding: 16px 20px;
+      padding: 24px 28px;
       border-radius: 6px;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      overflow: hidden;
       transition: 0.3s ease;
     }
 
     .card:hover {
-      box-shadow: 0 4px 14px rgba(0,123,255,0.2);
-      transform: translateY(-3px);
-      background: linear-gradient(160deg, #ffffff, #e6f0ff);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(43,127,255,0.15);
     }
 
-    .color-slider {
-      width: 220px;
-      margin-top: 12px;
-      cursor: pointer;
+    .card::before {
+      content:"";
+      position:absolute;
+      top:0; left:0; width:100%; height:5px;
+      background: linear-gradient(90deg, #2b7fff, #6dc7ff);
+      transition: 0.3s ease;
+    }
+    .card:hover::before {
+      height:100%;
+      opacity:0.05;
     }
 
-    #mouseGradient {
+    h2 {
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    p, li {font-size:16px; line-height:1.6;}
+
+    ul {padding-left:20px; margin: 6px 0;}
+
+    .btn {
+      display: inline-block;
+      padding: 11px 18px;
+      background: #2b7fff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 15px;
+      font-weight: 500;
+      transition: 0.3s ease;
+      margin-top: 6px;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #2b7fff, #6dc7ff);
+      transform: scale(1.05);
+      box-shadow:0 4px 14px rgba(43,127,255,0.28);
+    }
+
+    .slider {
+      width:100%;
+      overflow:hidden;
+      margin-top:14px;
+      border-radius:6px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    .slides {
+      display:flex;
+      width:100%;
+      animation: autoSlide 20s infinite linear;
+    }
+
+    .slides img {
+      width:100%;
+      flex-shrink:0;
+    }
+
+    @keyframes autoSlide {
+      0% { transform: translateX(0); }
+      14% { transform: translateX(-100%); }
+      28% { transform: translateX(-200%); }
+      42% { transform: translateX(-300%); }
+      56% { transform: translateX(-400%); }
+      70% { transform: translateX(-500%); }
+      84% { transform: translateX(-600%); }
+      100% { transform: translateX(0); }
+    }
+
+    .footer {
+      margin-top:30px;
+      text-align:center;
+      font-size:14px;
+      color:#555;
+    }
+
+    .mouse-gradient {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-      background: radial-gradient(circle at 50% 50%, #007bff22, #00c6ff33, transparent 70%);
-      transition: background 0.25s ease;
+      inset: 0;
+      z-index:-2;
+      pointer-events:none;
+      background: radial-gradient(circle at 50% 50%, rgba(43,127,255,0.18), rgba(109,199,255,0.23), transparent 66%);
+      transition: 0.2s ease;
     }
   </style>
 </head>
-<body>
 
-<div id="mouseGradient"></div>
+<body>
+<div class="mouse-gradient" id="mouseGradient"></div>
 
 <div class="container">
-
   <div class="hero">
     <h1>Swapnil Khot</h1>
     <div class="subtitle">CRM Technical Developer | AWS | Azure | Linux | DevOps</div>
 
     <div class="nav">
-      <a href="#">Home</a> ·
-      <a href="projects/index.html">Projects</a> ·
-      <a href="thoughts/index.html">Thoughts</a>
+      <a href="#about">About</a> ·
+      <a href="#skills">Skills</a> ·
+      <a href="#projects">Projects</a> ·
+      <a href="#thoughts">Thoughts</a>
     </div>
 
-    <input type="range" id="colorRange" min="0" max="360" value="210" class="color-slider"/>
+    <a class="btn" href="Swapnil_Khot_Resume.pdf" download>Download Resume</a>
   </div>
 
-  <section class="card">
-    <h2>About</h2>
-    <p>I build on CRM and cloud, connect services reliably and like keeping things clean and simple.</p>
+  <section id="about" class="card">
+    <h2>About Me</h2>
+    <p>I build on Dynamics CRM, .NET APIs and cloud integrations. I enjoy designing clean systems that keep things fast, secure, and easy to understand.</p>
   </section>
 
-  <section class="card">
-    <h2>Certificates</h2>
-    <p>Browse categories:</p>
+  <section id="skills" class="card">
+    <h2>Skills</h2>
     <ul>
-      <li>📁 AWS Certificates</li>
-      <li>📁 Microsoft Certificates</li>
-      <li>📁 Google Certificates</li>
+      <li>C#, ASP.NET Core (Web API)</li>
+      <li>:contentReference[oaicite:1]{index=1} Services (EC2, RDS, Auto Scaling)</li>
+      <li>:contentReference[oaicite:2]{index=2} Dynamics CRM and Azure Basics</li>
+      <li>Git, GitHub, CI/CD basics</li>
+      <li>Linux and automation fundamentals</li>
     </ul>
   </section>
 
-  <section class="card">
+  <section id="projects" class="card">
     <h2>Projects</h2>
-    <p>Infrastructure driven apps and integrations.</p>
+    <ul>
+      <li><b>AWS High Availability Migration</b> – Deployed scalable infra for improved uptime</li>
+      <li><b>RentAPlace Backend</b> – Role access and file/image upload workflows</li>
+      <li><b>CRM Cloud Integrations</b> – Reliable service connections and automation basics</li>
+    </ul>
   </section>
 
-  <section class="card">
+  <section id="thoughts" class="card">
     <h2>Thoughts</h2>
-    <p>Short technical notes and learnings.</p>
+    <p>I document technical ideas, learnings, and best practices at:</p>
+    <a class="btn" href="thoughts/index.html">Read Thoughts</a>
   </section>
 
-  <a class="btn" href="Swapnil_Khot_Resume.pdf" download>Download Resume</a>
+  <section id="certificates" class="card">
+    <h2>Certificates Showcase</h2>
+    <p>Quick view of my key certification highlights:</p>
+    <div class="slider">
+      <div class="slides">
+        <img src="https://your-progress-image-1.png"/>
+        <img src="https://your-progress-image-2.png"/>
+        <img src="https://your-progress-image-3.png"/>
+        <img src="https://your-progress-image-4.png"/>
+        <img src="https://your-progress-image-5.png"/>
+        <img src="https://your-progress-image-6.png"/>
+        <img src="https://your-progress-image-7.png"/>
+      </div>
+    </div>
+
+    <p style="margin-top:16px; font-size:15px; color:#777;">You will replace these thumbnails with your actual certificate previews later.</p>
+
+  </section>
+
+  <div class="footer">
+    Built and hosted for free using :contentReference[oaicite:3]{index=3}.
+  </div>
 
 </div>
 
 <script>
-  // Color slider logic
-  const slider = document.getElementById("colorRange");
-  slider.addEventListener("input", (e) => {
-    const hue = e.target.value;
-    document.body.style.background = `hsl(${hue}, 70%, 96%)`;
+  // mouse movement gradient reposition
+  const mg = document.getElementById("mouseGradient");
+  document.addEventListener("mousemove", e => {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    mg.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(43,127,255,0.3), rgba(109,199,255,0.37), transparent 72%)`;
   });
 
-  // Mouse move gradient color change
-  const gradient = document.getElementById("mouseGradient");
-  document.addEventListener("mousemove", (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-    const xPercent = (x / window.innerWidth) * 100;
-    const yPercent = (y / window.innerHeight) * 100;
-
-    gradient.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, #007bff44, #00c6ff55, rgba(255,255,255,0.3) 20%, transparent 72%)`;
+  // color slider that shifts overall theme hue
+  const cr = document.createElement("input");
+  cr.type="range"; cr.min="0"; cr.max="360"; cr.value="210"; cr.className="color-slider";
+  cr.style.cssText="position:fixed;bottom:15px;left:15px;width:180px;opacity:0.8;";
+  document.body.appendChild(cr);
+  cr.addEventListener("input", e => {
+    document.body.style.background = `hsl(${e.target.value}, 55%, 97%)`;
   });
 </script>
 
