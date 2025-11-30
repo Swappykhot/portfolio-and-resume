@@ -1,32 +1,30 @@
-### Enhanced Portfolio & Resume for Swapnil Khot  
-I've added a **dedicated Resume section** with work experience and education details, improved visual hierarchy, and fixed the navigation. Here's the complete solution:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Swapnil Khot - CRM Technical Developer specializing in AWS, Azure, Linux & DevOps">
   <title>Portfolio and Resume | Swapnil Khot</title>
 
-  <!-- ICONS CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
   <style>
-    /* RESET & BASE */
-    * {
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     html, body {
       width: 100%;
-      height: 100%;
-      font-family: 'Poppins', Arial, sans-serif;
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Poppins, Arial, sans-serif;
       background: #faf7ff;
-      color: #333;
-      line-height: 1.6;
+      color: #2d1b4e;
     }
 
     body {
@@ -40,7 +38,7 @@ I've added a **dedicated Resume section** with work experience and education det
       inset: 0;
       z-index: -50;
       background: radial-gradient(circle at 50% 50%, rgba(150,50,255,0.15), rgba(90,10,160,0.12), transparent 70%);
-      transition: 0.08s ease-out;
+      transition: background 0.15s ease-out;
       pointer-events: none;
     }
 
@@ -58,31 +56,43 @@ I've added a **dedicated Resume section** with work experience and education det
     }
 
     @keyframes rise {
-      0% {transform: scale(1); opacity: 1;}
-      100% {transform: scale(5); opacity: 0; translateY: -22px;}
+      0% { transform: scale(1) translateY(0); opacity: 1; }
+      100% { transform: scale(4) translateY(-25px); opacity: 0; }
     }
 
-    /* HEADER & NAV */
+    /* Respect reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      .cursor-trail,
+      .mouse-bg { display: none; }
+      
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      html { scroll-behavior: auto; }
+    }
+
+    /* HEADER */
     .hero {
-      padding: 60px 18px 40px;
+      padding: 70px 20px 50px;
       text-align: center;
-      background: linear-gradient(135deg, rgba(123,0,219,0.05) 0%, rgba(75,0,130,0.08) 100%);
-      border-bottom: 1px solid rgba(123,0,219,0.1);
+      background: linear-gradient(180deg, rgba(138,43,226,0.08) 0%, transparent 100%);
     }
 
     .hero h1 {
-      font-size: 42px;
-      margin-bottom: 8px;
+      font-size: clamp(32px, 5vw, 44px);
+      margin: 0 0 8px;
       font-weight: 700;
-      background: linear-gradient(to right, #7a00d9, #4b0082);
+      background: linear-gradient(135deg, #4b0082, #8a2be2);
       -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       background-clip: text;
-      color: transparent;
     }
 
     .subtitle {
-      font-size: 18px;
-      color: #551a8b;
+      font-size: clamp(14px, 2.5vw, 18px);
+      color: #6b3fa0;
       margin-bottom: 20px;
       font-weight: 500;
     }
@@ -91,320 +101,308 @@ I've added a **dedicated Resume section** with work experience and education det
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 8px 24px;
     }
 
     .nav a {
-      margin: 0 8px;
-      font-size: 16px;
+      font-size: 15px;
       text-decoration: none;
       color: #7a00d9;
       font-weight: 500;
       position: relative;
-      padding: 8px 12px;
-      border-radius: 6px;
-      transition: 0.3s;
+      padding: 4px 0;
+      transition: color 0.3s;
     }
 
     .nav a::after {
       content: "";
       position: absolute;
-      left: 50%;
+      left: 0;
       bottom: 0;
       width: 0%;
       height: 2px;
-      background: #7a00d9;
-      transition: 0.3s;
-      transform: translateX(-50%);
+      background: linear-gradient(90deg, #8a2be2, #4b0082);
+      transition: width 0.3s ease;
     }
 
-    .nav a:hover {
-      background: rgba(122,0,217,0.1);
-    }
-
-    .nav a:hover::after {
-      width: 80%;
-    }
+    .nav a:hover { color: #4b0082; }
+    .nav a:hover::after { width: 100%; }
 
     /* CONTAINER */
     .container {
       width: 100%;
-      max-width: 1100px;
+      max-width: 900px;
       margin: auto;
-      padding: 30px 20px 60px;
+      padding: 20px 20px 60px;
     }
 
     /* CARDS */
     .card {
       background: white;
-      padding: 30px;
+      padding: 28px 32px;
       border-radius: 16px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 20px rgba(116,0,255,0.08);
-      transition: 0.3s ease;
-      border: 1px solid rgba(116,0,255,0.1);
-      animation: appear 0.6s ease-out;
-      position: relative;
-      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(116,0,255,0.06);
+      border: 1px solid rgba(116,0,255,0.08);
+      animation: appear 0.6s ease-out both;
     }
 
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to bottom, #7a00d9, #4b0082);
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    .card:nth-child(4) { animation-delay: 0.4s; }
+    .card:nth-child(5) { animation-delay: 0.5s; }
+
+    @keyframes appear {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 30px rgba(128,0,255,0.2);
-    }
-
-    @keyframes appear {
-      0% {opacity: 0; transform: translateY(15px);}
-      100% {opacity: 1; transform: translateY(0);}
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(128,0,255,0.12);
+      border-color: rgba(128,0,255,0.15);
     }
 
     h2 {
-      font-size: 26px;
-      margin-bottom: 20px;
+      font-size: 20px;
+      margin: 0 0 16px;
       color: #4b0082;
-      font-weight: 700;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     h2 i {
-      color: #7a00d9;
+      font-size: 18px;
+      color: #8a2be2;
     }
 
-    h3 {
-      font-size: 20px;
-      color: #551a8b;
-      margin: 28px 0 15px;
-      font-weight: 600;
-    }
-
-    /* LISTS */
-    ul li {
-      font-size: 16px;
-      margin-bottom: 12px;
+    p {
+      font-size: 15px;
       line-height: 1.7;
-      position: relative;
-      padding-left: 26px;
+      color: #4a3660;
+      margin: 0 0 12px;
     }
 
-    ul li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: #7a00d9;
-      font-weight: bold;
+    ul {
+      margin: 0;
+      padding-left: 20px;
     }
 
-    /* BUTTONS */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: #7a00d9;
-      padding: 14px 24px;
-      border-radius: 8px;
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 600;
-      transition: 0.3s;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(122,0,217,0.25);
+    ul li {
+      font-size: 15px;
+      margin-bottom: 10px;
+      line-height: 1.65;
+      color: #4a3660;
     }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(122,0,217,0.4);
-      background: #6900c3;
+    ul li b {
+      color: #4b0082;
     }
 
     /* CERT BADGES */
     .cert-badge-container {
       display: flex;
-      gap: 22px;
+      gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 20px;
+      margin-top: 16px;
     }
 
     .cert-badge {
-      width: 120px;
-      height: 120px;
-      border-radius: 20px;
+      width: 90px;
+      height: 90px;
+      border-radius: 16px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(140deg, #8a2be2, #4b0082);
-      color: white;
-      font-size: 48px;
-      transition: 0.4s ease;
+      gap: 6px;
+      background: linear-gradient(145deg, rgba(138,43,226,0.12), rgba(75,0,130,0.08));
+      color: #5a189a;
+      font-size: 32px;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(138,43,226,0.3);
-      border: 2px solid rgba(255,255,255,0.2);
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .cert-badge span {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .cert-badge:hover {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 15px 30px rgba(138,43,226,0.5);
+      border-color: #8a2be2;
+      box-shadow: 0 8px 24px rgba(138,43,226,0.25);
+      transform: translateY(-6px) scale(1.05);
+      color: white;
+      background: linear-gradient(145deg, #8a2be2, #5a189a);
     }
 
-    /* RESUME STYLES */
-    .timeline {
-      position: relative;
-      padding-left: 30px;
-      margin: 25px 0 10px;
+    .cert-badge:active {
+      transform: translateY(-2px) scale(1.02);
     }
 
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to bottom, #7a00d9, #4b0082);
-      border-radius: 2px;
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 10, 50, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
     }
 
-    .timeline-item {
-      position: relative;
-      margin-bottom: 35px;
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
 
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -33px;
-      top: 8px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #7a00d9;
-      box-shadow: 0 0 0 4px rgba(122,0,217,0.2);
+    .modal {
+      background: white;
+      padding: 32px;
+      border-radius: 20px;
+      max-width: 420px;
+      width: 90%;
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 20px 60px rgba(90,24,154,0.3);
     }
 
-    .job-title {
+    .modal-overlay.active .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    .modal h3 {
+      margin: 0 0 16px;
+      color: #4b0082;
       font-size: 20px;
-      color: #4b0082;
-      font-weight: 600;
-      margin-bottom: 5px;
     }
 
-    .company {
-      font-size: 16px;
-      color: #7a00d9;
-      font-weight: 500;
-      margin-bottom: 5px;
+    .modal ul {
+      margin: 0;
+      padding-left: 18px;
     }
 
-    .duration {
+    .modal li {
+      margin-bottom: 8px;
+      color: #4a3660;
+    }
+
+    .modal-close {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #8a2be2, #5a189a);
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
       font-size: 14px;
-      color: #551a8b;
       font-weight: 500;
-      margin-bottom: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .education-item {
-      margin-bottom: 30px;
+    .modal-close:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(138,43,226,0.4);
     }
 
-    .degree {
-      font-size: 19px;
-      color: #4b0082;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    .institution {
-      font-size: 16px;
-      color: #551a8b;
-      margin-bottom: 5px;
-    }
-
-    .location {
-      font-size: 14px;
-      color: #7a00d9;
-      font-weight: 500;
-    }
-
-    /* SOCIAL ICONS */
+    /* SOCIAL */
     .social {
       display: flex;
-      gap: 20px;
-      justify-content: center;
-      margin-top: 15px;
+      gap: 12px;
+      margin-top: 8px;
     }
 
     .social a {
-      display: inline-flex;
-      align-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
       justify-content: center;
-      width: 50px;
-      height: 50px;
-      background: rgba(122,0,217,0.1);
-      border-radius: 50%;
-      transition: 0.3s;
+      align-items: center;
+      background: linear-gradient(145deg, rgba(138,43,226,0.1), rgba(75,0,130,0.05));
+      color: #7a00d9;
+      transition: all 0.3s ease;
     }
 
     .social a:hover {
-      background: #7a00d9;
-      transform: translateY(-5px);
-    }
-
-    .social i {
-      font-size: 22px;
-      color: #7a00d9;
-      transition: 0.3s;
-    }
-
-    .social a:hover i {
+      background: linear-gradient(145deg, #8a2be2, #5a189a);
       color: white;
-      transform: scale(1.2);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(138,43,226,0.3);
+    }
+
+    .social a i {
+      font-size: 20px;
     }
 
     /* FOOTER */
     .footer {
       text-align: center;
-      margin-top: 40px;
-      padding-top: 20px;
-      color: #666;
-      font-size: 14px;
-      border-top: 1px solid rgba(0,0,0,0.05);
+      padding: 30px 20px;
+      font-size: 13px;
+      color: #7a6b8a;
+      border-top: 1px solid rgba(138,43,226,0.1);
+      margin-top: 20px;
+    }
+
+    .footer i {
+      color: #8a2be2;
+    }
+
+    /* BACK TO TOP */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8a2be2, #5a189a);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      box-shadow: 0 4px 20px rgba(138,43,226,0.4);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 50;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(138,43,226,0.5);
     }
 
     /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 32px;
-      }
-      
-      .nav {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .nav a {
-        width: 100%;
-        max-width: 200px;
-        text-align: center;
+    @media (max-width: 600px) {
+      .card {
+        padding: 22px 20px;
       }
       
       .cert-badge {
-        width: 90px;
-        height: 90px;
-        font-size: 36px;
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
       }
     }
   </style>
@@ -414,231 +412,209 @@ I've added a **dedicated Resume section** with work experience and education det
 
   <div class="mouse-bg" id="mouseBg"></div>
 
-  <div class="hero">
+  <header class="hero">
     <h1>Swapnil Khot</h1>
     <div class="subtitle">CRM Technical Developer | AWS | Azure | Linux | DevOps</div>
-    <div class="nav">
+    <nav class="nav">
       <a href="#about">About</a>
-      <a href="#resume">Resume</a>
       <a href="#certificates">Certificates</a>
       <a href="#projects">Projects</a>
       <a href="#thoughts">Thoughts</a>
       <a href="#contact">Connect</a>
-    </div>
-  </div>
+    </nav>
+  </header>
 
-  <div class="container">
+  <main class="container">
 
-    <!-- ABOUT SECTION -->
     <section id="about" class="card">
       <h2><i class="fa-solid fa-user"></i> About Me</h2>
-      <p style="font-size:17px;line-height:1.8;color:#3f0f63;">
-        Results-driven CRM Technical Developer with expertise in building scalable cloud solutions on AWS and Azure. 
-        Specialized in integrating CRM systems with custom APIs, implementing DevOps practices, and ensuring 
-        high availability through cloud-native architectures. Passionate about creating maintainable, secure 
-        systems that solve real business problems.
+      <p>
+        Building CRM extensions and server-side logic, connected with cloud services. 
+        Focus on practicality, reliability, and maintainable code. Passionate about 
+        automation and infrastructure that scales.
       </p>
     </section>
 
-    <!-- RESUME SECTION -->
-    <section id="resume" class="card">
-      <h2><i class="fa-solid fa-file-lines"></i> Resume</h2>
-      
-      <h3>Work Experience</h3>
-      
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="job-title">Senior CRM Technical Developer</div>
-          <div class="company">Tech Solutions Inc.</div>
-          <div class="duration">Jan 2021 - Present</div>
-          <ul>
-            <li>Spearheaded migration of on-premise CRM to AWS cloud, reducing operational costs by 35%</li>
-            <li>Developed and maintained .NET Core APIs integrating Dynamics 365 with external services</li>
-            <li>Implemented CI/CD pipelines using Azure DevOps, reducing deployment time by 60%</li>
-            <li>Designed disaster recovery plan with multi-region deployment achieving 99.99% uptime</li>
-          </ul>
-        </div>
-        
-        <div class="timeline-item">
-          <div class="job-title">CRM Developer</div>
-          <div class="company">Digital Innovations Ltd</div>
-          <div class="duration">Mar 2018 - Dec 2020</div>
-          <ul>
-            <li>Customized Salesforce CRM with Lightning components for 15+ clients</li>
-            <li>Built integration layer between CRM and ERP systems using REST APIs</li>
-            <li>Optimized database queries improving system response time by 40%</li>
-            <li>Mentored junior developers on CRM best practices</li>
-          </ul>
-        </div>
-        
-        <div class="timeline-item">
-          <div class="job-title">Junior Developer</div>
-          <div class="company">StartUp Hub</div>
-          <div class="duration">Jun 2016 - Feb 2018</div>
-          <ul>
-            <li>Developed internal tools using C# and SQL Server</li>
-            <li>Managed Linux servers and implemented monitoring using Nagios</li>
-            <li>Collaborated with DevOps team to containerize applications with Docker</li>
-          </ul>
-        </div>
-      </div>
-      
-      <h3>Education</h3>
-      
-      <div class="timeline">
-        <div class="timeline-item education-item">
-          <div class="degree">Bachelor of Technology - Computer Science</div>
-          <div class="institution">Mumbai University</div>
-          <div class="location">Mumbai, India</div>
-          <div class="duration">2012 - 2016</div>
-          <ul>
-            <li>Graduated with First Class (75%)</li>
-            <li>Relevant Coursework: Cloud Computing, Software Engineering, Database Systems</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CERTIFICATES SECTION -->
     <section id="certificates" class="card">
       <h2><i class="fa-solid fa-certificate"></i> Certifications</h2>
-      <p>Industry-recognized certifications in cloud technologies:</p>
+      <p>Click to explore certification tracks:</p>
       <div class="cert-badge-container">
-        <div class="cert-badge" title="AWS Certified Solutions Architect">
+        <div class="cert-badge" data-cert="aws">
           <i class="fa-brands fa-aws"></i>
+          <span>AWS</span>
         </div>
-        <div class="cert-badge" title="Microsoft Certified: Azure Developer Associate">
+        <div class="cert-badge" data-cert="azure">
           <i class="fa-brands fa-microsoft"></i>
+          <span>Azure</span>
         </div>
-        <div class="cert-badge" title="Google Cloud Professional Cloud Architect">
+        <div class="cert-badge" data-cert="gcp">
           <i class="fa-brands fa-google"></i>
+          <span>GCP</span>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS SECTION -->
     <section id="projects" class="card">
       <h2><i class="fa-solid fa-folder-open"></i> Projects</h2>
       <ul>
-        <li><b>AWS High Availability Migration</b> - Designed and implemented multi-AZ architecture with auto-scaling groups and load balancers, achieving 99.99% uptime SLA.</li>
-        <li><b>Dynamics 365 Integration Engine</b> - Built custom .NET Core API connecting CRM to 3rd-party services, processing 10k+ transactions/hour.</li>
-        <li><b>Cloud Monitoring Suite</b> - Created monitoring solution with Prometheus/Grafana reducing incident response time by 70%.</li>
-        <li><b>Linux Automation Toolkit</b> - Developed bash/Python scripts for automated server provisioning and patching.</li>
+        <li><b>AWS High Availability Migration</b> — Migrated a web app to AWS with load balancing and auto scaling for 99.9% uptime.</li>
+        <li><b>CRM API Integrations</b> — Connected Microsoft Dynamics CRM with .NET APIs and cloud services for seamless data flow.</li>
+        <li><b>Cloud Monitoring Setup</b> — Implemented system reliability using CloudWatch, centralized logging, and automated alerts.</li>
       </ul>
-      <a href="#" class="btn"><i class="fa-solid fa-code-fork"></i> View GitHub</a>
     </section>
 
-    <!-- THOUGHTS SECTION -->
     <section id="thoughts" class="card">
       <h2><i class="fa-solid fa-lightbulb"></i> Thoughts</h2>
-      <p>Practical insights from real projects:</p>
+      <p>Short notes, real learnings, applied thinking:</p>
       <ul>
-        <li><strong>Cloud Economics:</strong> Rightsizing instances and using spot instances can reduce cloud costs by 40-60% without compromising performance.</li>
-        <li><strong>DevOps Reality:</strong> Automation only adds value when it reduces manual effort. Measure ROI before implementing new pipelines.</li>
-        <li><strong>System Design:</strong> Design for failure - assume any component can fail and build resilience at every layer.</li>
-        <li><strong>Security First:</strong> Treat security as a feature, not an afterthought. Implement least-privilege access from day one.</li>
+        <li>Cloud is not just deployment — it's planning for failure and recovery too.</li>
+        <li>DevOps works when automation reduces effort, not adds complexity.</li>
+        <li>A good system is boring when it works, interesting when it survives.</li>
       </ul>
     </section>
 
-    <!-- CONNECT SECTION -->
     <section id="contact" class="card">
       <h2><i class="fa-solid fa-link"></i> Connect</h2>
-      <p>Let's discuss cloud solutions, CRM integrations, or potential collaborations!</p>
+      <p>Let's discuss cloud architecture, DevOps, or new opportunities.</p>
       <div class="social">
-        <a href="#" title="LinkedIn">
+        <a href="https://linkedin.com/in/" target="_blank" rel="noopener" aria-label="LinkedIn">
           <i class="fa-brands fa-linkedin"></i>
         </a>
-        <a href="#" title="GitHub">
+        <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
           <i class="fa-brands fa-github"></i>
         </a>
-        <a href="mailto:swapnil.khot@example.com" title="Email">
+        <a href="mailto:swapnil@example.com" aria-label="Email">
           <i class="fa-solid fa-envelope"></i>
         </a>
       </div>
-      <a href="vCard/vcard.vcf" class="btn" download><i class="fa-solid fa-download"></i> Download vCard</a>
     </section>
 
-    <div class="footer">
-      Built and hosted for free using GitHub Pages | © 2023 Swapnil Khot
-    </div>
+    <footer class="footer">
+      <i class="fa-solid fa-code"></i> Built with care & hosted on GitHub Pages
+    </footer>
 
+  </main>
+
+  <!-- CERTIFICATE MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h3 id="modalTitle">Certifications</h3>
+      <ul id="modalContent"></ul>
+      <button class="modal-close" onclick="closeModal()">Close</button>
+    </div>
   </div>
 
+  <!-- BACK TO TOP -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
 <script>
-  /* MAGIC SPARKLE TRAIL */
-  document.addEventListener("mousemove", (e) => {
-    const particle = document.createElement("div");
-    particle.className = "cursor-trail";
-    particle.style.left = e.clientX + "px";
-    particle.style.top = e.clientY + "px";
-    document.body.appendChild(particle);
-    setTimeout(() => particle.remove(), 1200);
-  });
+  // Certification Data
+  const certData = {
+    aws: {
+      title: "AWS Certifications",
+      items: [
+        "AWS Solutions Architect – Associate",
+        "AWS Developer – Associate",
+        "AWS SysOps Administrator"
+      ]
+    },
+    azure: {
+      title: "Microsoft Azure Certifications",
+      items: [
+        "Azure Administrator (AZ-104)",
+        "Azure Developer Associate",
+        "Microsoft Dynamics 365"
+      ]
+    },
+    gcp: {
+      title: "Google Cloud Certifications",
+      items: [
+        "Associate Cloud Engineer",
+        "Professional Cloud Architect"
+      ]
+    }
+  };
 
-  /* VIOLET MOUSE GRADIENT FOLLOW */
-  const bg = document.getElementById("mouseBg");
-  document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth) * 100;
-    const y = (e.clientY / window.innerHeight) * 100;
-    bg.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(148,0,211,0.38), rgba(75,0,130,0.42), transparent 68%)`;
-  });
+  // Modal Functions
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalContent = document.getElementById('modalContent');
 
-  /* Smooth scroll for navigation links */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 80,
-          behavior: 'smooth'
-        });
-      }
+  document.querySelectorAll('.cert-badge').forEach(badge => {
+    badge.addEventListener('click', () => {
+      const cert = badge.dataset.cert;
+      const data = certData[cert];
+      modalTitle.textContent = data.title;
+      modalContent.innerHTML = data.items.map(item => `<li>${item}</li>`).join('');
+      modalOverlay.classList.add('active');
     });
   });
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+  }
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Back to Top Button
+  const backToTop = document.getElementById('backToTop');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backToTop.classList.add('visible');
+    } else {
+      backToTop.classList.remove('visible');
+    }
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion) {
+    // Throttle helper
+    function throttle(func, limit) {
+      let inThrottle;
+      return function(...args) {
+        if (!inThrottle) {
+          func.apply(this, args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
+        }
+      };
+    }
+
+    // Mouse Background Gradient
+    const bg = document.getElementById('mouseBg');
+    
+    document.addEventListener('mousemove', throttle((e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      bg.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(148,0,211,0.25), rgba(75,0,130,0.18), transparent 65%)`;
+    }, 30));
+
+    // Cursor Trail (throttled)
+    document.addEventListener('mousemove', throttle((e) => {
+      const particle = document.createElement('div');
+      particle.className = 'cursor-trail';
+      particle.style.left = e.clientX + 'px';
+      particle.style.top = e.clientY + 'px';
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 1200);
+    }, 50));
+  }
 </script>
 
 </body>
 </html>
-```
-
-### Key Improvements:
-
-1. **New Resume Section**:
-   - Professional timeline design with connecting lines
-   - Detailed work experience (3 positions with achievements)
-   - Education details with institution and timeframe
-   - Visual indicators for each timeline item
-
-2. **Enhanced Visual Design**:
-   - Gradient hero section with better typography
-   - Subtle left border accent on all cards
-   - Improved certificate badges with hover effects
-   - Better spacing and hierarchy
-   - Responsive layout for mobile devices
-
-3. **Content Improvements**:
-   - Expanded "About Me" with professional summary
-   - Added specific achievements in projects
-   - Practical insights in "Thoughts" section
-   - Added vCard download button in "Connect" section
-
-4. **Navigation Fixes**:
-   - Added "Resume" link in navigation
-   - Fixed smooth scrolling behavior
-   - Improved hover effects on nav items
-
-5. **Technical Enhancements**:
-   - Proper HTML5 semantic structure
-   - CSS variables for consistent colors
-   - Performance-optimized animations
-   - Mobile-responsive design
-   - Added checklist-style bullet points (✓)
-
-6. **Interactive Elements**:
-   - Certificate badges show titles on hover
-   - Social icons have scale animations
-   - Cards lift up on hover
-   - Magic cursor trail preserved
-
-The resume section is designed to be the centerpiece of your portfolio, clearly showcasing your professional journey with visual hierarchy and specific accomplishments. All sections are now properly linked in navigation for seamless user experience.
