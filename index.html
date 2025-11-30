@@ -9,54 +9,54 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
 <style>
-/* Full page base */
+/* Base page */
 html, body {
   margin:0;
   padding:0;
   width:100%;
-  min-height:100%;
+  height:100%;
   font-family:Arial, sans-serif;
-  background:linear-gradient(130deg, #4b0082, #6a0dad, #8a2be2, #bb86ff);
-  color:#fff;
+  background: linear-gradient(135deg, #4b0082, #7a38ff, #a45bff);
+  color:white;
   cursor:none;
-  overflow-x:hidden;
   scroll-behavior:smooth;
+  overflow-x:hidden;
 }
 
-/* Glow background follows pointer */
+/* Subtle glow that follows mouse */
 #mouseGlow {
   position:fixed;
   inset:0;
-  z-index:-10;
+  z-index:-1;
+  background:radial-gradient(650px circle at 50% 50%, rgba(255,170,255,0.2), transparent 80%);
   pointer-events:none;
   transition:0.12s linear;
-  background:radial-gradient(700px circle at 50% 50%, rgba(255,255,255,0.14), transparent 80%);
 }
 
-/* Custom sharp pointer dot */
+/* Sharp small cursor dot */
 #cursor {
   position:fixed;
-  width:6px;
-  height:6px;
+  width:6.5px;
+  height:6.5px;
   border-radius:50%;
   background:#fff;
-  box-shadow:0 0 12px rgba(148,0,255,0.7), 0 0 32px rgba(90,0,140,0.35);
+  box-shadow:0 0 14px rgba(180,0,255,0.8), 0 0 32px rgba(120,0,255,0.4);
   transform:translate(-50%, -50%);
   pointer-events:none;
   z-index:100000;
 }
 
-/* Sparkle tail particles */
+/* Fine glitter sparkles */
 .sparkle {
   position:fixed;
-  width:2px;
-  height:2px;
+  width:2.2px;
+  height:2.2px;
   border-radius:50%;
-  background:hsl(calc(275 + 85 * var(--r)), 100%, 78%);
-  box-shadow:0 0 5px #fff, 0 0 12px rgba(160,0,255,0.65);
   pointer-events:none;
+  background:hsl(calc(285 + 75 * var(--r)), 100%, 78%);
+  box-shadow:0 0 5px #fff, 0 0 12px rgba(170,0,255,0.82);
   opacity:1;
-  animation:spark 0.8s ease-out forwards;
+  animation:spark 0.75s ease-out forwards;
   z-index:99999;
 }
 
@@ -65,29 +65,26 @@ html, body {
   100%{opacity:0; transform:scale(0.15) translate(var(--dx), var(--dy));}
 }
 
-/* Wrapper */
+/* Main wrapper */
 .container {
   max-width:960px;
   margin:auto;
-  padding:70px 18px 50px;
+  padding:70px 18px;
   text-align:center;
-}
-
-/* Headings */
-h2 {
-  font-size:17px;
-  font-weight:600;
-  color:#fff;
-  margin:6px 0 22px 0;
+  background:rgba(255,255,255,0.07);
+  border-radius:18px;
+  backdrop-filter:blur(12px);
+  border:1.5px solid rgba(255,255,255,0.15);
+  box-shadow:0 2px 32px rgba(0,0,0,0.2);
 }
 
 /* Navigation */
 .nav {
   display:flex;
   justify-content:center;
-  gap:22px;
+  gap:20px;
   flex-wrap:wrap;
-  margin-bottom:42px;
+  margin:30px 0 40px;
 }
 
 .nav a {
@@ -98,106 +95,111 @@ h2 {
   display:inline-flex;
   align-items:center;
   gap:5px;
-  transition:0.28s;
   padding:5px 8px;
   border-radius:6px;
+  transition:0.25s;
 }
 
-.nav a i { font-size:14px; }
+/* Reduce icon size inside nav */
+.nav a i { font-size:13.5px; }
 
 .nav a:hover {
   transform:scale(1.14);
-  background:rgba(255,255,255,0.12);
-  box-shadow:0 0 12px rgba(255,0,255,0.25);
   color:#fff;
+  background:rgba(255,255,255,0.12);
+  box-shadow:0 0 10px rgba(255,0,255,0.3);
   text-decoration:underline;
 }
 
-/* Grid settings */
+/* Sections grid */
+.section {
+  margin-top:40px;
+  opacity:0;
+  transform:translateY(10px);
+  animation:reveal 0.6s forwards;
+}
+
+@keyframes reveal {
+  100% { opacity:1; transform:translateY(0); }
+}
+
+/* Square grid cards */
 .grid {
   display:grid;
   justify-content:center;
   gap:22px;
   grid-template-columns:repeat(auto-fit,120px);
-  margin:18px auto;
+  margin-top:16px;
 }
 
-.card {
+.grid .card {
   width:120px;
   height:120px;
-  border-radius:16px;
   background:rgba(255,255,255,0.15);
-  border:1.4px solid rgba(255,255,255,0.22);
-  box-shadow:0 2px 14px rgba(0,0,0,0.14);
+  border-radius:14px;
+  border:1.4px solid rgba(255,255,255,0.2);
   display:flex;
   justify-content:center;
   align-items:center;
-  cursor:pointer;
-  transition:0.28s;
-  font-size:34px;
+  font-size:30px;
   color:#4b0082;
+  cursor:pointer;
+  transition:0.3s;
+  backdrop-filter:blur(6px);
+  box-shadow:0 1.2px 10px rgba(0,0,0,0.15);
 }
 
-.card i { font-size:34px; }
+/* Smaller icons inside grid card */
+.grid .card i { font-size:30px; }
 
-.card:hover {
-  transform:scale(1.17) rotate(4deg);
+.grid .card:hover {
+  transform: scale(1.18) rotate(4deg);
   background:rgba(255,255,255,0.25);
   color:#fff;
-  border-color:rgba(255,255,255,0.3);
-  box-shadow:0 0 22px rgba(255,0,255,0.4), 0 0 54px rgba(148,0,255,0.22);
+  border-color:white;
+  box-shadow:0 0 22px rgba(255,0,255,0.3);
 }
 
-.btn {
+/* Resume button */
+.resume-btn {
   display:inline-flex;
-  justify-content:center;
   align-items:center;
-  background:#fff;
+  justify-content:center;
+  gap:7px;
+  background:white;
   color:#6a0dad;
-  padding:10px 18px;
+  padding:10px 20px;
   border-radius:6px;
-  font-size:14px;
+  font-size:14.5px;
   font-weight:600;
   text-decoration:none;
-  gap:7px;
-  transition:0.28s;
-  margin-top:18px;
-  box-shadow:0 2px 22px rgba(255,255,255,0.22);
+  transition:0.26s;
+  margin-bottom:22px;
 }
 
-.btn i { font-size:13px; }
+.resume-btn i { font-size:13.5px; }
 
-.btn:hover {
-  transform:scale(1.12) translateY(-1px);
+.resume-btn:hover {
+  transform:scale(1.12);
   color:#4b0082;
-  box-shadow:0 0 34px rgba(255,255,255,0.36);
+  box-shadow:0 0 28px rgba(255,0,255,0.3);
 }
 
-/* Social */
+/* Social icons */
 .social {
   display:flex;
   justify-content:center;
-  gap:16px;
+  gap:14px;
   margin-top:14px;
 }
-.social a i {
-  font-size:21px;
-  color:#fff;
-  transition:0.24s;
-}
-.social a:hover i {
-  transform:scale(1.28) rotate(2deg);
-  opacity:1;
-  text-shadow:0 0 8px rgba(255,0,255,0.6),0 0 20px rgba(160,0,255,0.4);
-}
+
+.social i { font-size:19px; } /* make socials smaller */
 
 /* Footer */
 .footer {
-  margin-top:54px;
   font-size:14px;
-  color:#fff;
-  opacity:0.94;
-  font-weight:500;
+  margin-top:36px;
+  opacity:0.9;
 }
 </style>
 </head>
@@ -208,31 +210,22 @@ h2 {
 <div id="cursor"></div>
 
 <div class="container">
+  <a class="resume-btn" href="Swapnil_Khot_Resume.pdf" download>
+    <i class="fa-solid fa-download"></i> Resume (PDF)
+  </a>
 
-  <div class="hero">
-    <h1 style="font-size:40px;margin-bottom:12px;font-weight:600  !important">
-      Swapnil Khot
-    </h1>
-
-    <a class="btn" href="Swapnil_Khot_Resume.pdf" download>
-      <i class="fa-solid fa-download"></i>Resume (PDF)
-    </a>
+  <div class="nav">
+    <a href="#about"><i class="fa-solid fa-user"></i> About</a>
+    <a href="#skills"><i class="fa-solid fa-code"></i> Skills</a>
+    <a href="#certificates"><i class="fa-solid fa-award"></i> Certificates</a>
+    <a href="#projects"><i class="fa-solid fa-folder"></i> Projects</a>
+    <a href="#thoughts"><i class="fa-solid fa-lightbulb"></i> Thoughts</a>
+    <a href="#contact"><i class="fa-solid fa-link"></i> Connect</a>
   </div>
 
-  <nav class="nav">
-    <a href="#about"><i class="fa-solid fa-user"></i>About</a>
-    <a href="#skills"><i class="fa-solid fa-code"></i>Skills</a>
-    <a href="#certs"><i class="fa-solid fa-award"></i>Certificates</a>
-    <a href="#projects"><i class="fa-solid fa-folder"></i>Projects</a>
-    <a href="#thoughts"><i class="fa-solid fa-lightbulb"></i>Thoughts</a>
-    <a href="#contact"><i class="fa-solid fa-link"></i>Connect</a>
-  </nav>
-
-  <section id="about" class="card">
-    <h2><i class="fa-solid fa-user"></i> About</h2>
-    <p style="font-size:15px;line-height:1.6;max-width:620px;margin:auto;">
-      Backend developer and CRM plugin builder, experimenting with cloud automation and reliable system design.
-    </p>
+  <section id="about" class="section">
+    <h2>About</h2>
+    <div class="footer">CRM technical developer building plugins and automation focused on clean, reliable solutions.</div>
   </section>
 
   <section id="skills" class="section">
@@ -245,7 +238,7 @@ h2 {
     </div>
   </section>
 
-  <section id="certs" class="section">
+  <section id="certificates" class="section">
     <h2>Certificates</h2>
     <div class="grid">
       <div class="card" onclick="location.href='certificates/aws/'"><i class="fa-brands fa-aws"></i></div>
@@ -261,6 +254,7 @@ h2 {
       <div class="card" onclick="location.href='projects/'"><i class="fa-solid fa-server"></i></div>
       <div class="card" onclick="location.href='projects/'"><i class="fa-solid fa-code"></i></div>
     </div>
+    <div class="footer"></div>
   </section>
 
   <section id="thoughts" class="section">
@@ -270,6 +264,7 @@ h2 {
       <div class="card" onclick="location.href='thoughts/'"><i class="fa-solid fa-pen"></i></div>
       <div class="card" onclick="location.href='thoughts/'"><i class="fa-solid fa-lightbulb"></i></div>
     </div>
+    <div class="footer"></div>
   </section>
 
   <section id="contact" class="section">
@@ -279,53 +274,33 @@ h2 {
       <a href="https://github.com/swappykhot"><i class="fa-brands fa-github"></i></a>
       <a href="mailto:swapnil.khot07@gmail.com"><i class="fa-solid fa-envelope"></i></a>
     </div>
+    <div class="footer"></div>
   </section>
-
-  <footer class="footer">
-    Built and hosted for free using :contentReference[oaicite:0]{index=0}
-  </footer>
 </div>
 
 <script>
-/* Custom pointer */
-const cursor = document.getElementById("cursor");
+/* Mouse Pointer and Trail */
+const pointer = document.getElementById("cursor");
+window.addEventListener("mousemove", (e) => {
+  pointer.style.left = e.clientX + "px";
+  pointer.style.top  = e.clientY + "px";
 
-/* Glow follows mouse */
-window.addEventListener("mousemove",(e)=>{
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top  = e.clientY + "px";
-});
+  if (Math.random() < 0.45) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.style.setProperty("--r", Math.random());
 
-/* Micro glitter sparkle trail */
-document.addEventListener("mousemove",(e)=>{
-  if(Math.random() < 0.45) {
-    const s = document.createElement("div");
-    s.className="sparkle";
-    s.style.setProperty("--r", Math.random());
+    const angle = Math.random() * Math.PI * 2;
+    const distance = Math.random() * 24 + 8;
+    sparkle.style.setProperty("--dx", Math.cos(angle) * distance + "px");
+    sparkle.style.setProperty("--dy", Math.sin(angle) * distance + "px");
 
-    const ang = Math.random()*Math.PI*2;
-    const d   = Math.random()*28 + 8;
-    const dx  = Math.cos(ang)*d;
-    const dy  = Math.sin(ang)*d;
-
-    s.style.setProperty("--dx",dx+"px");
-    s.style.setProperty("--dy",dy+"px");
-
-    s.style.left = e.clientX+"px";
-    s.style.top  = e.clientY+"px";
-    s.style.animation = "spark 0.8s ease forwards";
-
-    document.body.appendChild(s);
-    setTimeout(()=> s.remove(), 820);
+    sparkle.style.left = e.clientX + "px";
+    sparkle.style.top  = e.clientY + "px";
+    sparkle.style.animation = "sparkle 0.8s ease-out forwards";
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 820);
   }
-});
-
-/* Full page violet glow bg reposition */
-const glow = document.getElementById("mouseGlow");
-window.addEventListener("mousemove", e=>{
-  const x = (e.clientX/innerWidth)*100;
-  const y = (e.clientY/innerHeight)*100;
-  glow.style.background = `radial-gradient(820px circle at ${x}% ${y}%, rgba(160,70,255,0.28), rgba(75,0,130,0.32), transparent 80%)`;
 });
 </script>
 
