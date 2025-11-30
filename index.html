@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Portfolio | Swapnil Khot</title>
 
+<!-- Small icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
 <style>
@@ -14,211 +15,174 @@ html, body {
   width:100%;
   min-height:100%;
   font-family:Arial, sans-serif;
-  background:linear-gradient(125deg, #4b0082, #7a38ff, #9f60ff, #c77dff);
+  background:linear-gradient(125deg, #5a00b3, #8f2eff, #b336ff, #6000d9);
   color:#fff;
   cursor:none;
   scroll-behavior:smooth;
   overflow-x:hidden;
 }
 
+/* cursor */
 #cursor {
   position:fixed;
   width:6px;
   height:6px;
   border-radius:50%;
   background:#fff;
+  box-shadow:0 0 14px rgba(148,0,255,0.7), 0 0 30px rgba(160,0,255,0.32);
   transform:translate(-50%, -50%);
-  box-shadow:0 0 14px rgba(180,0,255,0.7), 0 0 28px rgba(145,60,255,0.35);
   pointer-events:none;
   z-index:100000;
 }
 
+/* sparkle */
 .sparkle {
   position:fixed;
   width:2px;
   height:2px;
   border-radius:50%;
   pointer-events:none;
-  background:hsl(calc(265 + 95 * var(--r)), 100%, 82%);
-  box-shadow:0 0 5px #fff,0 0 11px rgba(170,0,255,0.72);
+  background:hsl(calc(275 + 90 * var(--r)), 100%, 76%);
+  box-shadow:0 0 6px #fff,0 0 12px #b336ffaa;
   opacity:1;
   animation:spark 0.7s ease-out forwards;
-  z-index:99999;
 }
 
 @keyframes spark {
-  0%{opacity:1; transform:scale(1) translate(0,0);}
-  100%{opacity:0; transform:scale(0.2) translate(var(--dx),var(--dy));}
+  0% {opacity:1; transform:scale(1) translate(0,0);}
+  100%{opacity:0; transform:scale(0.15) translate(var(--dx), var(--dy));}
 }
 
+/* layout */
 .page {
-  max-width:880px;
-  margin:70px auto 50px;
-  padding:32px 22px;
-  text-align:center;
-  background:rgba(255,255,255,0.1);
+  max-width:900px;
+  margin:70px auto 40px auto;
+  padding:32px;
   border-radius:16px;
+  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.07);
   border:1.5px solid rgba(255,255,255,0.16);
-  backdrop-filter:blur(14.6px);
   box-shadow:0 2px 38px rgba(0,0,0,0.18);
+  animation: pageLoad 0.8s ease;
 }
 
-/* Section formatting */
-.section {
-  max-width:700px;
-  margin:34px auto 0;
-  text-align:left;
-  background:rgba(255,255,255,0.14);
-  padding:18px 22px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.2);
-  line-height:1.7;
-  font-size:15px;
-  opacity:0.97;
-  color:#fff;
-  box-shadow:0 1.5px 14px rgba(0,0,0,0.1);
+@keyframes pageLoad {
+  0% {opacity:0; transform:translateY(14px)}
+  100% {opacity:1; transform:translateY(0)}
 }
 
-.section h2 {
-  font-size:17px;
-  font-weight:600;
-  margin:0 0 12px 0;
-  display:flex;
-  align-items:center;
-  gap:6px;
-  color:#fff;
-}
-
+/* nav */
 .nav {
   display:flex;
   justify-content:center;
-  gap:28px;
+  gap:26px;
   flex-wrap:wrap;
-  margin:28px 0 42px;
+  margin-bottom:46px;
 }
-
 .nav a {
-  font-size:14px;
-  font-weight:600;
-  text-decoration:none;
-  color:#fdead1;
-  display:inline-flex;
+  display:flex;
   flex-direction:column;
   align-items:center;
+  font-size:13.5px;
+  font-weight:600;
+  color:#ffe6ff;
+  text-decoration:none;
   gap:3px;
-  transition:0.27s;
+  transition:0.26s;
 }
-
-.nav a i {
-  font-size:16px; /* small icons */
-  transition:0.27s;
-}
-
+.nav a i {font-size:16.5px}
 .nav a:hover {
-  transform:scale(1.15);
-  color:#fff;
-  text-shadow:0 0 8px rgba(255,0,255,0.5);
+  transform:scale(1.17);
+  color:white;
+  text-shadow:0 0 8px rgba(255,100,255,0.6);
   text-decoration:underline;
 }
 
-.link-btn {
-  display:inline-flex;
-  align-items:center;
-  background:#fff;
-  color:#4b0082;
-  padding:7px 14px;
-  font-size:13.5px;
-  font-weight:600;
-  border-radius:6px;
-  text-decoration:none;
-  gap:5px;
-  transition:0.26s;
+/* reveal sections */
+.section {
+  max-width:700px;
+  margin:36px auto;
+  padding:18px 22px;
+  background:rgba(255,255,255,0.13);
+  border:1px solid rgba(255,255,255,0.17);
+  border-radius:10px;
+  line-height:1.6;
+  font-size:15px;
+  text-align:left;
+  opacity:0;
+  transform:translateY(10px);
+  animation:reveal 0.6s forwards;
+}
+@keyframes reveal {
+  100%{opacity:1; transform:translateY(0)}
 }
 
-.link-btn:hover {
-  transform:scale(1.1);
-  box-shadow:0 0 26px rgba(255,255,255,0.4);
-  color:#7a38ff;
-}
-
+/* square grids */
 .square-grid {
   display:grid;
   justify-content:center;
   gap:18px;
-  grid-template-columns:repeat(auto-fit, 96px);
+  grid-template-columns:repeat(auto-fit, 110px);
   margin-top:14px;
 }
-
 .square-card {
-  width:96px;
-  height:96px;
+  width:110px;
+  height:110px;
   border-radius:14px;
   background:rgba(255,255,255,0.15);
-  border:1.3px solid rgba(255,255,255,0.25);
+  border:1px solid rgba(255,255,255,0.25);
   box-shadow:0 1.2px 9px rgba(0,0,0,0.14);
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:24px;
-  cursor:pointer;
-  transition:0.26s;
+  font-size:21px;
   color:#fff;
+  cursor:pointer;
+  transition:0.25s;
 }
-
-.square-card i {
-  font-size:22px; /* smaller icon inside square */
-}
-
+.square-card i {font-size:22px}
 .square-card:hover {
-  transform:scale(1.18) rotate(6deg);
+  transform:scale(1.19) rotate(5deg);
   background:#ffffff22;
-  box-shadow:0 0 22px rgba(255,0,255,0.28);
   border-color:#fff;
+  box-shadow:0 0 20px rgba(255,120,255,0.6),0 0 40px rgba(150,0,255,0.2);
 }
 
+/* socials */
 .social {
   display:flex;
   justify-content:center;
   gap:16px;
   margin-top:12px;
 }
-
 .social a i {
-  font-size:18px; /* small social icons */
+  font-size:18px;
   color:#fff;
   transition:0.2s;
 }
-
 .social a:hover i {
-  transform:scale(1.3) rotate(3deg);
+  transform:scale(1.3) rotate(2deg);
   text-shadow:0 0 7px #fff,0 0 14px #b336ffaa;
 }
 
 .footer {
-  margin-top:44px;
-  font-size:13.6px;
+  margin-top:50px;
   text-align:center;
+  font-size:13.6px;
+  opacity:0.9;
   color:#f8eaff;
-  font-weight:500;
 }
 </style>
 </head>
 
 <body>
-
 <div id="cursor"></div>
 
 <div class="page">
 
-  <div class="hero">
-    <h1 style="font-size:36px;margin-bottom:8px;font-weight:600;">Swapnil Khot</h1>
-    <p style="font-size:15px;opacity:0.9;margin:0 0 20px 0;">CRM Technical Developer | Cloud | DevOps</p>
-    <iframe style="width:100%;height:500px;border-radius:12px;border:2px solid rgba(255,255,255,0.18);box-shadow:0 0 20px rgba(180,0,255,0.25);" src="Swapnil_Khot_Resume.pdf"></iframe>
-  </div>
-
-  <!-- Simple icon navigation -->
+  <!-- Nav -->
   <nav class="nav">
-    <a onclick="location.href='skills/'"><i class="fa-solid fa-code"></i>Skills</a>
+    <a onclick="location.href='resume.html'"><i class="fa-solid fa-file"></i>Resume</a>
     <a onclick="location.href='certificates/aws/'"><i class="fa-brands fa-aws"></i>AWS Certs</a>
     <a onclick="location.href='certificates/microsoft/'"><i class="fa-brands fa-microsoft"></i>MS Certs</a>
     <a onclick="location.href='certificates/google/'"><i class="fa-brands fa-google"></i>Google Certs</a>
@@ -226,52 +190,35 @@ html, body {
     <a onclick="location.href='thoughts/'"><i class="fa-solid fa-lightbulb"></i>Thoughts</a>
   </nav>
 
-  <!-- About section -->
-  <section id="about" class="section">
-    <h2><i class="fa-solid fa-user"></i> About</h2>
-    <p>
-      CRM and backend developer focused on plugins, APIs, and cloud automation.  
-      I like building things that are clean, practical, and reliable.
-    </p>
+  <!-- About -->
+  <section class="section">
+    <h2><i class="fa-solid fa-user"></i> Who I am</h2>
+    <p>I work on CRM plugin development, backend API automations, and cloud CI/CD learning labs. I like building things that are clean, practical, and reliable.</p>
   </section>
 
-  <!-- Projects section -->
-  <section id="projects" class="section">
-    <h2><i class="fa-solid fa-folder"></i> Projects</h2>
-
+  <!-- Projects -->
+  <section class="section">
+    <h2><i class="fa-solid fa-folder"></i> Project Highlights</h2>
     <div class="square-grid">
-      <div class="square-card" onclick="location.href='projects/aws.html'">
-        <i class="fa-brands fa-aws"></i>
-      </div>
-      <div class="square-card" onclick="location.href='projects/crm.html'">
-        <i class="fa-solid fa-code"></i>
-      </div>
-      <div class="square-card" onclick="location.href='projects/linux.html'">
-        <i class="fa-brands fa-linux"></i>
-      </div>
+      <div class="square-card" onclick="location.href='projects/aws.html'"><i class="fa-brands fa-aws"></i></div>
+      <div class="square-card" onclick="location.href='projects/crm.html'"><i class="fa-solid fa-code"></i></div>
+      <div class="square-card" onclick="location.href='projects/linux.html'"><i class="fa-brands fa-linux"></i></div>
     </div>
   </section>
 
-  <!-- Thoughts section -->
-  <section id="thoughts" class="section">
-    <h2><i class="fa-solid fa-lightbulb"></i> Thoughts</h2>
-
+  <!-- Thoughts -->
+  <section class="section">
+    <h2><i class="fa-solid fa-lightbulb"></i> Notes & Ideas</h2>
     <div class="square-grid">
-      <div class="square-card" onclick="location.href='thoughts/blog1.html'">
-        <i class="fa-solid fa-book"></i>
-      </div>
-      <div class="square-card" onclick="location.href='thoughts/blog2.html'">
-        <i class="fa-solid fa-pen"></i>
-      </div>
-      <div class="square-card" onclick="location.href='thoughts/blog3.html'">
-        <i class="fa-solid fa-brain"></i>
-      </div>
+      <div class="square-card" onclick="location.href='thoughts/blog1.html'"><i class="fa-solid fa-book"></i></div>
+      <div class="square-card" onclick="location.href='thoughts/blog2.html'"><i class="fa-solid fa-pen"></i></div>
+      <div class="square-card" onclick="location.href='thoughts/blog3.html'"><i class="fa-solid fa-brain"></i></div>
     </div>
   </section>
 
   <!-- Connect -->
-  <section id="contact" class="section">
-    <h2><i class="fa-solid fa-link"></i> Connect</h2>
+  <section class="section">
+    <h2><i class="fa-solid fa-link"></i> Find me here</h2>
     <div class="social">
       <a href="https://linkedin.com/in/swappykhot"><i class="fa-brands fa-linkedin"></i></a>
       <a href="https://github.com/swappykhot"><i class="fa-brands fa-github"></i></a>
@@ -280,23 +227,23 @@ html, body {
   </section>
 
   <div class="footer">
-    Live for free on :contentReference[oaicite:0]{index=0}
+    Live for free using :contentReference[oaicite:0]{index=0}
   </div>
 
 </div>
 
 <script>
-// cursor follows mouse
-const d = document.getElementById("cursor");
+// cursor core follow
+const p = document.getElementById("cursor");
 window.addEventListener("mousemove",(e)=>{
-  d.style.left=e.clientX+"px";
-  d.style.top =e.clientY+"px";
+  p.style.left=e.clientX+"px";
+  p.style.top =e.clientY+"px";
 
-  if(Math.random() < 0.45){
+  if(Math.random() < 0.55){
     const s=document.createElement("div");
     s.className="sparkle";
     const ang=Math.random()*Math.PI*2;
-    const dist=Math.random()*14 + 4;
+    const dist=Math.random()*18 + 4;
     const dx=Math.cos(ang)*dist;
     const dy=Math.sin(ang)*dist;
     s.style.setProperty("--dx",dx+"px");
@@ -305,8 +252,16 @@ window.addEventListener("mousemove",(e)=>{
     s.style.left=e.clientX+"px";
     s.style.top =e.clientY+"px";
     document.body.appendChild(s);
-    setTimeout(()=>s.remove(),720);
+    setTimeout(()=>s.remove(),700);
   }
+});
+
+/* glow reposition */
+const glow=document.getElementById("mouseGlow");
+window.addEventListener("mousemove",(e)=>{
+  const x=(e.clientX/innerWidth)*100;
+  const y=(e.clientY/innerHeight)*100;
+  glow.style.background=`radial-gradient(700px circle at ${x}% ${y}%, rgba(255,150,255,0.1), transparent 80%)`;
 });
 </script>
 
