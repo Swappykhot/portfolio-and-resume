@@ -1,248 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Portfolio | Swapnil Khot</title>
 
-<!-- Icons (free CDN) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
 <style>
-/* --- Base page --- */
+/* ---- Full colorful background ---- */
 html, body {
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
   font-family: Arial, sans-serif;
-  background:#ffffff;
-  color:#2d1b4b;
-  cursor:none;             /* Hide system cursor */
-  overflow-x:hidden;
-  scroll-behavior:smooth;
+  background: linear-gradient(120deg, #6f00ff, #aa00ff, #f200ff, #8f2eff, #6000d9);
+  color: #ffffff;
+  cursor: none;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-/* --- Soft full-page violet glow that tracks cursor --- */
-#mouseGlow {
+/* ---- Glow pointer core ---- */
+#magicPointer {
   position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(700px circle at 50% 50%, rgba(138,43,226,0.18), rgba(75,0,130,0.15), transparent 78%);
-  transition: 0.1s linear;
-}
-
-/* --- Premium small magic cursor dot --- */
-#cursor {
-  position: fixed;
-  width: 6.2px;
-  height: 6.2px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: rgba(145,60,255,0.98);
-  box-shadow: 0 0 18px rgba(148,0,255,0.6), 0 0 34px rgba(90,0,140,0.42), 0 0 54px rgba(186,85,211,0.25);
+  background: rgba(255,150,255,1);
+  box-shadow: 0 0 24px rgba(255,0,255,0.8), 0 0 50px rgba(120,0,255,0.45);
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 100000;
+  z-index: 99999;
+  transition: 0.05s linear;
 }
 
-/* --- Micro fine sparkle glitter trail --- */
+/* ---- Micro glitter sparkles ---- */
 .sparkle {
   position: fixed;
-  width: 2.4px;
-  height: 2.4px;
+  width: 2px;
+  height: 2px;
   border-radius: 50%;
+  background: hsl(calc(285 + 70 * var(--rand)), 100%, 80%);
+  box-shadow: 0 0 9px rgba(255,200,255,0.9), 0 0 18px rgba(160,0,255,0.6);
   pointer-events: none;
   opacity: 1;
-  background: rgba(190,110,255,0.9); /* violet/pink spectrum */
-  box-shadow: 0 0 8px rgba(186,85,211,0.7), 0 0 16px rgba(138,43,226,0.5);
-  animation: dustSpark 0.9s ease-out forwards;
-  z-index: 99999;
+  z-index: 99998;
 }
 
-@keyframes dustSpark {
-  0% {opacity:1; transform:scale(1) translate(0,0);}
-  100%{opacity:0; transform:scale(0.2) translate(var(--dx), var(--dy));}
+@keyframes sparkle {
+  0% { opacity: 1; transform: scale(1) translate(0,0); }
+  100% { opacity: 0; transform: scale(0.1) translate(var(--dx), var(--dy)); }
 }
 
-/* --- Layout container --- */
-.wrapper {
-  width:100%;
-  max-width:960px;
-  margin:auto;
-  padding:70px 22px 40px;
-  text-align:center;
+/* ---- Content Cards ---- */
+.container {
+  max-width: 960px;
+  margin: auto;
+  padding: 60px 18px 40px;
+  text-align: center;
 }
 
-/* --- Headings --- */
-h2 {
-  font-size: 18px;
+.hero h1 {
+  font-size: 44px;
   font-weight: 600;
-  color: #4b0082;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
+  background: linear-gradient(90deg, #ffffff, #e0b3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* --- Nav --- */
 .nav {
-  display:flex;
-  justify-content:center;
-  gap:26px;
-  flex-wrap:wrap;
-  margin-bottom:42px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 40px 0;
 }
 
 .nav a {
-  text-decoration:none;
-  font-size:15px;
-  font-weight:600;
-  color:#7a38ff;
-  transition:0.3s;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #eaccff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.3s;
 }
 
 .nav a:hover {
-  transform:scale(1.15);
-  color:#4b0082;
-  text-decoration:underline;
+  transform: scale(1.18);
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255,0,255,0.4);
+  text-decoration: underline;
 }
 
-/* --- Square portfolio boxes --- */
-.grid {
-  display: grid;
+.section {
+  background: rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  border: 1.6px solid rgba(255,255,255,0.16);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 18px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: reveal 0.7s ease forwards;
+}
+
+@keyframes reveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  width: 150px;
+  height: 150px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.2);
+  display: flex;
   justify-content: center;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, 150px);
-  margin: 20px auto;
+  align-items: center;
+  font-size: 45px;
+  color: #d8b3ff;
+  cursor: pointer;
+  transition: 0.3s;
+  backdrop-filter: blur(7px);
 }
 
-.box {
-  width:150px;
-  height:150px;
-  border-radius:18px;
-  background:white;
-  border:1.5px solid rgba(122,56,255,0.1);
-  box-shadow:0 2px 10px rgba(122,56,255,0.04);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:50px;
-  color:#7a38ff;
-  cursor:pointer;
-  transition:0.3s;
+.card:hover {
+  transform: scale(1.15);
+  background: #ffffff22;
+  color: white;
+  box-shadow: 0 0 26px rgba(255,0,255,0.35), 0 0 50px rgba(160,0,255,0.22);
 }
 
-.box:hover {
-  transform: scale(1.11) rotate(3deg);
-  background:#7a38ff;
-  color:white;
-  box-shadow:0 0 36px rgba(138,43,226,0.4);
-  border-color:rgba(138,43,226,0.3);
-}
-
-/* --- Resume button --- */
+/* ---- Buttons ---- */
 .btn {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  background:#7a38ff;
-  color:white;
-  padding:12px 20px;
-  border-radius:6px;
-  font-size:14.6px;
-  font-weight:600;
-  text-decoration:none;
-  transition:0.3s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #6f00ff;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 .btn:hover {
-  transform: scale(1.12) translateY(-1px);
-  background:#6a2bd9;
-  box-shadow:0 0 30px rgba(160,70,255,0.38);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 0 32px rgba(255,240,255,0.42);
+  background: #ffffff;
+  color: #8f2eff;
 }
 
-/* --- Footer --- */
+/* ---- Social Icons ---- */
+.social {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.social a i {
+  font-size: 24px;
+  color:#eaccff;
+  transition:0.28s;
+}
+
+.social a:hover i {
+  transform: scale(1.36) rotate(3deg);
+  color:white;
+  filter:brightness(1.2);
+  text-shadow: 0 0 10px rgba(255,0,255,0.7);
+}
+
+/* ---- Footer ---- */
 .footer {
-  margin-top: 46px;
+  margin-top: 42px;
   font-size: 14px;
-  color:#551a8b;
-  opacity: 0.85;
-  font-weight: 500;
-}
-
-.footer a {
-  color:#7a38ff;
-  text-decoration:none;
-  font-weight:600;
-}
-
-.footer a:hover {
-  color:#4b0082;
-  text-decoration:underline;
+  color:#fff;
+  opacity: 0.9;
 }
 </style>
 </head>
 
 <body>
 
-<div id="mouseGlow"></div>
-<div id="cursor"></div>
+<div id="magicPointer"></div>
 
-<div class="wrapper">
+<div class="container">
+  <div class="hero">
+     <h1>Swapnil Khot</h1>
+     <a class="btn" href="Swapnil_Khot_Resume.pdf" download>
+       <i class="fa-solid fa-download"></i> Download Resume
+     </a>
+  </div>
 
-  <header>
-    <h1 style="font-size:42px;margin-bottom:8px;font-weight:600;color:#4b0082;">Swapnil Khot</h1>
-    <p style="font-size:16px;color:#6a4c9c;font-weight:500;margin:0 0 24px 0;">CRM Technical Developer | Cloud | DevOps</p>
-    <a class="btn" href="Resume.pdf" download><i class="fa-solid fa-download"></i> Resume (PDF)</a>
-  </header>
-
-  <nav class="nav">
+  <div class="nav">
     <a href="#about"><i class="fa-solid fa-user"></i>About</a>
-    <a href="#certs"><i class="fa-solid fa-award"></i>Certificates</a>
+    <a href="#skills"><i class="fa-solid fa-code"></i>Skills</a>
+    <a href="#certificates"><i class="fa-solid fa-award"></i>Certificates</a>
     <a href="#projects"><i class="fa-solid fa-folder"></i>Projects</a>
     <a href="#thoughts"><i class="fa-solid fa-lightbulb"></i>Thoughts</a>
-    <a href="#connect"><i class="fa-solid fa-link"></i>Connect</a>
-  </nav>
+    <a href="#contact"><i class="fa-solid fa-link"></i>Connect</a>
+  </div>
 
-  <section id="about">
-    <h2>About</h2>
-    <p style="font-size:15.6px;line-height:1.6;max-width:640px;margin:auto;">
-      Backend developer and CRM plugin builder, with a strong interest in automated cloud deployments and system reliability.
-    </p>
+  <section id="skills" class="section">
+    <h2>Skills</h2>
+    <div class="badges">
+      <div class="card"><i class="fa-brands fa-aws"></i></div>
+      <div class="card"><i class="fa-brands fa-microsoft"></i></div>
+      <div class="card"><i class="fa-brands fa-google"></i></div>
+      <div class="card"><i class="fa-brands fa-github"></i></div>
+    </div>
   </section>
 
-  <section id="certs">
+  <section id="certificates" class="section">
     <h2>Certificates</h2>
     <div class="grid">
-      <div class="box" onclick="location.href='certificates/AWS/'"><i class="fa-brands fa-aws"></i></div>
-      <div class="box" onclick="location.href='certificates/Microsoft/'"><i class="fa-brands fa-microsoft"></i></div>
-      <div class="box" onclick="location.href='certificates/Google/'"><i class="fa-brands fa-google"></i></div>
+      <a class="card btn" href="certificates/AWS/">:contentReference[oaicite:0]{index=0}</a>
+      <a class="card btn" href="certificates/Microsoft/">:contentReference[oaicite:1]{index=1}</a>
+      <a class="card btn" href="certificates/Google/">:contentReference[oaicite:2]{index=2}</a>
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" class="section">
     <h2>Projects</h2>
     <div class="grid">
-      <div class="box" onclick="location.href='projects/'"><i class="fa-solid fa-cloud"></i></div>
-      <div class="box" onclick="location.href='projects/'"><i class="fa-solid fa-server"></i></div>
-      <div class="box" onclick="location.href='projects/'"><i class="fa-solid fa-code"></i></div>
+      <div class="box"><i class="fa-solid fa-cloud"></i></div>
+      <div class="box"><i class="fa-solid fa-server"></i></div>
+      <div class="box"><i class="fa-solid fa-code"></i></div>
     </div>
   </section>
 
-  <section id="thoughts">
+  <section id="thoughts" class="section">
     <h2>Thoughts</h2>
     <div class="grid">
-      <div class="box" onclick="location.href='thoughts/'"><i class="fa-solid fa-book"></i></div>
-      <div class="box" onclick="location.href='thoughts/'"><i class="fa-solid fa-pen"></i></div>
-      <div class="box" onclick="location.href='thoughts/'"><i class="fa-solid fa-lightbulb"></i></div>
+       <div class="box"><i class="fa-solid fa-book"></i></div>
+       <div class="box"><i class="fa-solid fa-pen"></i></div>
+       <div class="box"><i class="fa-solid fa-heart"></i></div>
     </div>
   </section>
 
-  <section id="connect">
+  <section id="contact" class="section">
     <h2>Connect</h2>
-    <p style="font-size:15px;margin-bottom:6px;color:#551a8b;opacity:0.9;">Find me on:</p>
     <div class="social">
       <a href="#"><i class="fa-brands fa-linkedin"></i></a>
       <a href="#"><i class="fa-brands fa-github"></i></a>
@@ -250,40 +258,35 @@ h2 {
     </div>
   </section>
 
-  <footer class="footer">
-    Built and hosted for free using <a href="https://pages.github.com/">GitHub Pages</a>.
-  </footer>
-
+  <div class="footer">Built & hosted for free</div>
 </div>
 
 <script>
+// Pointer follows mouse
+const pointer = document.getElementById("magicPointer");
 
-/* --- Track main glowing pointer --- */
-const cursor = document.getElementById("cursor");
-window.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top  = e.clientY + "px";
-});
+document.addEventListener("mousemove", (e) => {
+  pointer.style.left = e.clientX + "px";
+  pointer.style.top  = e.clientY + "px";
 
-/* --- Generate ultra fine dust-like sparkles while moving --- */
-window.addEventListener("mousemove", (e) => {
-  if (Math.random() > 0.55) return; // spawn control
-  const spark = document.createElement("div");
-  spark.className = "sparkle";
-  spark.style.left = e.clientX + "px";
-  spark.style.top  = e.clientY + "px";
-  spark.style.setProperty("--dx", (Math.random()*32 - 16) + "px");
-  spark.style.setProperty("--dy", (Math.random()*32 - 24) + "px");
-  document.body.appendChild(spark);
-  setTimeout(()=> spark.remove(), 900);
-});
+  const sp = document.createElement("div");
+  sp.className="sparkle";
+  sp.style.setProperty("--rand", Math.random());
 
-/* --- Subtle full-page glow reposition --- */
-const bg = document.getElementById("mouseGlow");
-window.addEventListener("mousemove", e => {
-  const x = (e.clientX / innerWidth) * 100;
-  const y = (e.clientY / innerHeight) * 100;
-  bg.style.background = `radial-gradient(900px circle at ${x}% ${y}%, rgba(138,43,226,0.22), rgba(75,0,130,0.25), transparent 66%)`;
+  const angle = Math.random() * Math.PI * 2;
+  const distance = Math.random()*24 + 8;
+  const dx = Math.cos(angle)*distance;
+  const dy = Math.sin(angle)*distance;
+
+  sp.style.setProperty("--dx", dx+"px");
+  sp.style.setProperty("--dy", dy+"px");
+
+  sp.style.left = e.clientX + "px";
+  sp.style.top  = e.clientY + "px";
+  sp.style.animation = "sparkle 0.8s ease-out forwards";
+
+  document.body.appendChild(sp);
+  setTimeout(()=> sp.remove(), 700);
 });
 </script>
 
