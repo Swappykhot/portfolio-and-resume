@@ -9,266 +9,307 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
 
 <style>
-/* FULL PAGE */
+
+/* Full Page */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
   font-family: Arial, sans-serif;
-  background: #ffffff;
-  color: #1a0f2e;
-  scroll-behavior: smooth;
+  background:#ffffff;
+  color:#2a1a4a;
+  overflow:hidden;
+  scroll-behavior:smooth;
 }
 
-/* VIOLET MAGIC BACKGROUND FOLLOWING MOUSE */
+/* Mouse background glow follow effect */
 #mouseGlow {
   position: fixed;
   inset: 0;
-  z-index: -100;
-  background: radial-gradient(circle at 50% 50%, rgba(148,0,211,0.2), rgba(75,0,130,0.22), transparent 70%);
-  transition: 0.15s ease-out;
+  z-index: -10;
+  background: radial-gradient(800px circle at 50% 50%, rgba(148,0,255,0.2), rgba(75,0,130,0.16), transparent 80%);
   pointer-events: none;
+  transition: 0.12s linear;
 }
 
-/* SPARKLE DOT TRAIL */
-.cursor-dot {
+/* Micro-fine sparkle dots */
+.sparkle {
   position: fixed;
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: rgba(148,0,255,0.85);
+  background: rgba(186,85,211,0.95);
+  box-shadow: 0 0 10px rgba(186,85,211,0.85), 0 0 18px rgba(138,43,226,0.42);
   pointer-events: none;
-  box-shadow: 0 0 10px rgba(148,0,255,0.8), 0 0 20px rgba(75,0,130,0.4);
-  animation: sparkleMove 1s ease-out forwards;
+  animation: sparkleAnim 1.3s ease-out forwards;
   z-index: 9999;
 }
 
-@keyframes sparkleMove {
-  0% { opacity: 1; transform: scale(1) translateY(0); }
-  100% { opacity: 0; transform: scale(3.2) translateY(-25px); }
+@keyframes sparkleAnim {
+  0% {opacity:1; transform:scale(1);}
+  100%{opacity:0; transform:scale(3.8) translateY(-14px);}
 }
 
-/* HERO HEADER */
-.hero {
-  padding: 70px 20px 40px;
-  text-align: center;
-  border-radius: 6px;
-  transition: 0.4s ease;
-  cursor: default;
-}
-
-.hero:hover {
-  background: linear-gradient(145deg,#8a2be2,#4b0082);
-  color: white;
-  transform: scale(1.02);
-  box-shadow: 0 0 60px rgba(138,43,226,0.5);
-}
-
-/* NAV */
-.nav {
-  display: flex;
-  justify-content: center;
-  gap: 22px;
-  flex-wrap: wrap;
-  margin-bottom: 42px;
-}
-.nav a {
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  color: #7a38ff;
-  transition: 0.3s;
-}
-.nav a:hover {
-  color: #4b1d87;
-  transform: scale(1.15);
-  text-decoration: underline;
-}
-
-/* CONTENT CARDS */
+/* Main Layout */
 .container {
-  width: 100%;
-  max-width: 1200px;
+  max-width: 900px;
   margin: auto;
-  padding: 12px 22px 40px 22px;
+  padding: 60px 18px 30px;
+  text-align: center;
+  position:relative;
+  z-index:2;
 }
 
+/* Hero */
+.hero h1 {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #4b0082;
+}
+
+/* Nav */
+.nav {
+  display:flex;
+  justify-content:center;
+  gap:22px;
+  flex-wrap:wrap;
+  margin:30px 0;
+}
+
+.nav a {
+  text-decoration:none;
+  font-size:15px;
+  font-weight:600;
+  color:#7a38ff;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  transition:0.32s ease;
+}
+
+.nav a:hover {
+  transform:scale(1.16);
+  color:#4b0082;
+  text-decoration:underline;
+}
+
+/* Cards */
 .card {
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 28px 34px;
-  margin-bottom: 22px;
-  border: 1px solid rgba(148,0,211,0.12);
-  box-shadow: 0 2px 12px rgba(148,0,211,0.08);
-  transition: 0.35s ease;
+  background:white;
+  padding:22px 28px;
+  border-radius:12px;
+  margin-bottom:22px;
+  border:1.6px solid rgba(122,56,255,0.08);
+  box-shadow:0 2px 12px rgba(122,56,255,0.05);
+  transition:0.3s ease-out;
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 50px rgba(138,43,226,0.4), 0 10px 25px rgba(75,0,130,0.18);
-  border-color: rgba(138,43,226,0.55);
+  transform:scale(1.03) translateY(-2px);
+  box-shadow:0 0 40px rgba(128,0,255,0.18);
+  border-color:rgba(138,43,226,0.3);
 }
 
 .card h2 {
-  font-size: 21px;
-  font-weight: 700;
-  color: #4b0082;
+  font-size:20px;
+  font-weight:700;
+  color:#4b0082;
   margin-top:0;
   margin-bottom:10px;
   display:flex;
+  justify-content:center;
   align-items:center;
   gap:10px;
 }
 
 .card p, .card li {
-  font-size: 16px;
-  line-height: 1.64;
-  color: #2d1b4b;
+  font-size:15.6px;
+  line-height:1.64;
+  color:#3a1f63;
 }
 
-ul { padding-left:22px; margin-top:4px; }
+ul {
+  padding-left:22px;
+  text-align:left;
+  margin-top:6px;
+}
 
-/* BUTTON */
+/* Button */
 .btn {
-  display: inline-flex;
-  background:#7a00d9;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  background:#7a38ff;
   color:white;
-  padding:12px 22px;
+  padding:13px 22px;
   border-radius:6px;
-  font-size:15px;
+  font-size:14.5px;
   font-weight:600;
   text-decoration:none;
   transition:0.3s;
-  gap:8px;
-  align-items:center;
+  margin-top:15px;
 }
 
 .btn:hover {
-  transform: scale(1.15) translateY(-2px);
-  background: #6a2bd9;
-  box-shadow: 0 0 35px rgba(200,140,255,0.5);
+  transform:scale(1.12) translateY(-2px);
+  box-shadow:0 0 35px rgba(200,140,255,0.4);
+  background:#6a2bd9;
 }
 
-/* CERT CATEGORY ICONS */
+/* badges */
 .badges {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 20px;
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin:18px 0;
 }
 
 .badges div {
-  width:60px;
-  height:60px;
-  border-radius:14px;
+  width:72px; height:72px;
+  border-radius:16px;
+  background:#7a38ff11;
+  border:1.6px solid #7a38ff33;
   display:flex;
   justify-content:center;
   align-items:center;
-  background: #fff;
-  font-size:27px;
-  border:1px solid rgba(128,0,255,0.2);
-  box-shadow:0 0 12px rgba(128,0,255,0.08);
+  font-size:32px;
+  color:#7a38ff;
   cursor:pointer;
   transition:0.3s;
-  color:#7a38ff;
 }
 
 .badges div:hover {
-  transform: rotate(8deg) scale(1.18);
-  background: #7a38ff;
+  transform:rotate(6deg) scale(1.14);
+  background:#7a38ff;
   color:white;
-  box-shadow: 0 0 20px rgba(122,56,255,0.43);
-  border-color:#7a38ff;
+  box-shadow:0 0 24px rgba(138,43,226,0.38);
 }
+
+/* Social */
+.social {
+  display:flex;
+  gap:28px;
+  justify-content:center;
+  margin-top:14px;
+}
+
+.social a i {
+  font-size:26px;
+  color:#7a38ff;
+  transition:0.3s ease-out;
+}
+
+.social a:hover i {
+  transform:scale(1.22) rotate(3deg);
+  filter:brightness(1.3);
+  text-shadow:0 0 12px rgba(148,0,255,0.6);
+}
+
+/* Footer */
+.footer {
+  margin-top:38px;
+  font-size:13.8px;
+  color:#551a8b;
+  font-weight:500;
+  opacity:0.9;
+}
+
 </style>
 </head>
 
 <body>
-
 <div id="mouseGlow"></div>
 
 <div class="container">
   <header class="hero">
-    <h1 style="font-size:42px;margin-bottom:5px">Swapnil Khot</h1>
-    <div style="font-size:18px;color:#6a4c9c;margin-bottom:18px" class="subtitle">
-      CRM Technical Developer | AWS | Azure | Linux | DevOps
-    </div>
+    <h1>Swapnil Khot</h1>
   </header>
 
   <nav class="nav">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#certificates">Certifications</a>
-    <a href="#projects">Projects</a>
-    <a href="#thoughts">Thoughts</a>
+    <a href="#about"><i class="fa-solid fa-user"></i> About</a>
+    <a href="#skills"><i class="fa-solid fa-code"></i> Skills</a>
+    <a href="#certificates"><i class="fa-solid fa-award"></i> Certificates</a>
+    <a href="#projects"><i class="fa-solid fa-folder"></i> Projects</a>
+    <a href="#thoughts"><i class="fa-solid fa-lightbulb"></i> Thoughts</a>
+    <a href="#contact"><i class="fa-solid fa-link"></i> Connect</a>
   </nav>
 
   <section id="about" class="card">
-    <h2><i class="fa-solid fa-user"></i> About</h2>
-    <p>I work on backend, CRM customizations and cloud integrations, focused on building reliable systems.</p>
+    <h2>About</h2>
+    <p>I build backend logic and APIs, write CRM plugins, and automate deployments on cloud platforms.</p>
   </section>
 
   <section id="skills" class="card">
-    <h2><i class="fa-solid fa-code"></i> Skills</h2>
+    <h2>Skills</h2>
     <ul>
-      <li>CRM Plugin development and automation</li>
-      <li>C#, .NET Core Web APIs</li>
-      <li>AWS and Azure core services</li>
-      <li>Linux CLI, CI/CD basics</li>
+      <li>C#, .NET Core Web API</li>
+      <li>CRM Plugin Development</li>
+      <li>AWS, Azure Core Services</li>
+      <li>Linux CLI & CI/CD</li>
     </ul>
   </section>
 
   <section id="certificates" class="card">
-    <h2><i class="fa-solid fa-certificate"></i> Certifications</h2>
-    <p>Certification categories:</p>
+    <h2>Certificates</h2>
     <div class="badges">
       <div><i class="fa-brands fa-aws"></i></div>
       <div><i class="fa-brands fa-microsoft"></i></div>
       <div><i class="fa-brands fa-google"></i></div>
     </div>
-    <div style="text-align:center;margin-top:20px;">
-      <a class="btn" href="certificates/index.html">View Certificates</a>
-    </div>
   </section>
 
   <section id="projects" class="card">
-    <h2><i class="fa-solid fa-folder"></i> Projects</h2>
+    <h2>Projects</h2>
     <ul>
-      <li><b>AWS High Availability Migration</b> - scalable EC2 setup with load balancing</li>
-      <li><b>RentAPlace Backend</b> - role based access, file uploads</li>
-      <li><b>CRM Cloud Integration</b> - connected backend APIs with cloud services</li>
+      <li>AWS High Availability Setup</li>
+      <li>Microsoft CRM Plugin Automations</li>
+      <li>Backend API Cloud Integrations</li>
     </ul>
-    <div style="text-align:center;margin-top:15px;">
-      <a class="btn" href="projects/index.html">Open Projects</a>
-    </div>
+    <a class="btn" href="projects/index.html">View Projects</a>
   </section>
 
   <section id="thoughts" class="card">
-    <h2><i class="fa-solid fa-lightbulb"></i> Thoughts</h2>
-    <ul>
-      <li>Automation should reduce effort, not add confusion.</li>
-      <li>Cloud is planning for failures too, not just deployment.</li>
-      <li>Simplicity is underrated in large systems.</li>
-    </ul>
-    <div style="text-align:center;margin-top:15px;">
-      <a class="btn" href="thoughts/index.html">Read Thoughts</a>
-    </div>
+    <h2>Thoughts</h2>
+    <p>Practical notes on tech, automation and system reliability.</p>
+    <a class="btn" href="thoughts/index.html">Read Notes</a>
   </section>
 
-  <div class="footer">
-    Built and hosted for free using GitHub Pages.
-  </div>
+  <section id="contact" class="card">
+    <h2>Connect</h2>
+    <div class="social">
+      <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="#"><i class="fa-brands fa-github"></i></a>
+      <a href="mailto:contact@portfolio.in"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+    <a class="btn" href="Swapnil_Khot_Resume.pdf" download>Download Resume</a>
+  </section>
+
+  <div class="footer">Built and hosted for free on GitHub Pages.</div>
 </div>
 
 <script>
-// Gradient follows mouse
-window.addEventListener("mousemove", (e) => {
-  const x = (e.clientX / window.innerWidth) * 100;
-  const y = (e.clientY / window.innerHeight) * 100;
+/* Micro sparkles following mouse (organic, fine, smooth) */
+document.addEventListener("mousemove", e => {
+  if (Math.random() < 0.27) {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = e.clientX + "px";
+    s.style.top  = (e.clientY - 7) + "px";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 900);
+  }
+});
+
+/* Mouse glow follow */
+window.addEventListener("mousemove", e => {
+  const x = (e.clientX / innerWidth) * 100;
+  const y = (e.clientY / innerHeight) * 100;
   document.getElementById("mouseGlow").style.background =
-    `radial-gradient(circle at ${x}% ${y}%, rgba(128,0,255,0.34), rgba(75,0,130,0.37), transparent 63%)`;
+    `radial-gradient(800px circle at ${x}% ${y}%, rgba(140,45,255,0.3), rgba(75,0,130,0.35), transparent 66%)`;
 });
 </script>
 
